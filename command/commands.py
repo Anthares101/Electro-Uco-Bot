@@ -1,14 +1,17 @@
 # coding=utf-8
 import requests
 import os
-from heroku import bot, USERNAME, PASSWORD, WORKSPACE_ID
+from heroku import bot
+from heroku import USERNAME
+from heroku import PASSWORD
+from heroku import WORKSPACE_ID
 from telebot import util
 import json
 import watson_developer_cloud
 
 assistant = watson_developer_cloud.AssistantV1(
-    username='{USERNAME}',
-    password='{PASSWORD}',
+    username=USERNAME,
+    password=PASSWORD,
     version='2018-02-16'
 )
 
@@ -17,7 +20,7 @@ def start(message):
     bot.reply_to(message, 'Buenas, ' + message.from_user.first_name)
 
     response = assistant.message(
-		workspace_id='{WORKSPACE_ID}'
+		workspace_id=WORKSPACE_ID
     )
 
 	bot.reply_to(message, response['output']['text'][0])
@@ -33,11 +36,11 @@ def watson_bot(message):
 	context = chat.Chat.get_config(chat_id, 'context')
 
 	response = assistant.message(
-		workspace_id='{WORKSPACE_ID}',
+		workspace_id=WORKSPACE_ID,
 		input={
 			'text': message.text
 		},
-		context='{context}'
+		context=context
 	)
 
 	bot.reply_to(message, response['output']['text'][0])
