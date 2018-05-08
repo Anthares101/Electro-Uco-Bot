@@ -22,6 +22,18 @@ DATABASE_URL = os.environ.get('DATABASE_URL', False)
 if not DATABASE_URL:
     raise Exception('No se ha definido DATABASE_URL')
 
+WORKSPACE_ID = os.environ.get('WORKSPACE_ID', False)
+if not WORKSPACE_ID:
+    raise Exception('No se ha definido WORKSPACE_ID')
+
+USERNAME = os.environ.get('USERNAME', False)
+if not USERNAME:
+    raise Exception('No se ha definido USERNAME')
+
+PASSWORD = os.environ.get('PASSWORD', False)
+if not PASSWORD:
+    raise Exception('No se ha definido PASSWORD')
+
 bot = TeleBot(TOKEN, os.environ.get('POLLING', False))
 
 app = Flask(__name__)

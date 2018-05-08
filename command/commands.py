@@ -2,13 +2,45 @@
 import requests
 import os
 from heroku import bot
+from heroku import USERNAME
+from heroku import PASSWORD
+from heroku import WORKSPACE_ID
 from telebot import util
+import json
+import watson_developer_cloud
 
+assistant = watson_developer_cloud.AssistantV1(
+    username=USERNAME,
+    password=PASSWORD,
+    version='2018-02-16'
+)
 
 @bot.message_handler(commands=['start'])
 def start(message):
     bot.reply_to(message, 'Buenas, ' + message.from_user.first_name)
 
+    response = assistant.message(
+		workspace_id=WORKSPACE_ID
+    )
+
+	bot.reply_to(message, response['output']['text'][0])
+
+	context = response['context']
+
+    chat_id = message.chat.id
+    chat.Chat.set_config(chat_id, 'context', context)
+
 @bot.message_handler(func=lambda message: True, content_types=['text'])
-def echo_message(message):
-    bot.reply_to(message, message.text)
+def watson_bot(message):
+	chat_id = message.chat.id
+	context = chat.Chat.get_config(chat_id, 'context')
+
+	response = assistant.message(
+		workspace_id=WORKSPACE_ID,
+		input={
+			'text': message.text
+		},
+		context=context
+	)
+
+	bot.reply_to(message, response['output']['text'][0])
