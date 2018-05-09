@@ -33,7 +33,7 @@ def start(message):
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def watson_bot(message):
 
-	bot.reply_to(message, "xd 17")
+	bot.reply_to(message, "xd 18")
 
 	almacenamiento = chat.Chat.get_config(message.chat.id, 'contexto')
 	bot.reply_to(message, "%s" % almacenamiento)
@@ -46,7 +46,7 @@ def watson_bot(message):
 	    input={
 	        'text': message.text
 	    },
-	    context=contexto
+	    context=json.loads(contexto)
 	)
 
 	#bot.reply_to(message, chat.Chat.get_config(message.chat.id, 'contexto'))
