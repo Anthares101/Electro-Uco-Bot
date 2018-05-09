@@ -36,8 +36,7 @@ def ref(message):
         total = total + float(dato["total_ttc"])
 
     bot.send_message(message.chat.id, respuesta)
-    repuesta2="Precio total: " + str(total) + "\u20ac"
-    bot.send_message(message.chat.id, respuesta2)
+    bot.send_message(message.chat.id, "Precio total: " + str(total) + "\u20ac")
     return
 
 @bot.message_handler(func=lambda message: True, content_types=['text'])
