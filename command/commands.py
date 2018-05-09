@@ -1,6 +1,7 @@
 # coding=utf-8
 import requests
 import os
+import urllib, json
 from heroku import bot
 from telebot import util
 from model import chat
