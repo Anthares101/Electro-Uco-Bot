@@ -34,10 +34,10 @@ def start(message):
 def watson_bot(message):
 
 	almacenamiento = chat.Chat.get_config(message.chat.id, 'contexto')
-	#bot.reply_to(message, almacenamiento)
+	bot.reply_to(message, "%s" % almacenamiento)
 
 	contexto = almacenamiento.value
-	bot.reply_to(message, context.value)
+	bot.reply_to(message, "%s" % context.value)
 
 	response = assistant.message(
 	    workspace_id=WORKSPACE_ID,
