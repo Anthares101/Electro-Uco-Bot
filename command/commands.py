@@ -7,8 +7,7 @@ from telebot import util
 
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.reply_to(message, 'Buenas, ' + message.from_user.first_name)
-    bot.send_message(message.chat.id, 'Introduce su id de usuario')
+    bot.reply_to(message, 'Buenas, ' + message.from_user.first_name+', introduce su id de usuario')
 
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def echo_message(message):
