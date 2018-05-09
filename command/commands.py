@@ -24,8 +24,10 @@ def start(message):
 	    workspace_id=WORKSPACE_ID
 	)
 
+	contexto = response['context']
+
 	bot.reply_to(message, response['output']['text'][0])
-	bot.reply_to(message, "{response['context']}")
+	bot.reply_to(message, contexto)
 
 	chat.Chat.set_config(message.chat.id, 'context', response['context'])
 
