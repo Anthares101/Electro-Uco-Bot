@@ -29,7 +29,7 @@ def ref(message):
     datos = json.loads(response2.read())
     total = 0
 
-    respuesta=respuesta + "\n\nListado de productos:\n"
+    respuesta=respuesta + "\nListado de productos:\n"
     bot.send_message(message.chat.id, respuesta)
 
     """for dato in datos:
