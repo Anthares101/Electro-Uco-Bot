@@ -18,7 +18,7 @@ assistant = watson_developer_cloud.AssistantV1(
 
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.reply_to(message, 'Buenas, ' + message.from_user.first_name)
+    bot.reply_to(message, 'Illo, ' + message.from_user.first_name)
 
     response = assistant.message(
 		workspace_id=WORKSPACE_ID
