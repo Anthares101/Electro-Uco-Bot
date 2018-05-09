@@ -39,6 +39,8 @@ def ref(message):
     repuesta2="Precio total: " + total + "\u20ac"
     bot.send_message(message.chat.id, respuesta2)
 
+    return
+
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def echo_message(message):
     bot.reply_to(message, message.text)
