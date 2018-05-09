@@ -26,22 +26,19 @@ def start(message):
 
     bot.reply_to(message, response['output']['text'][0])
 
-    context = response['context']
-
     chat_id = message.chat.id
-    chat.Chat.set_config(chat_id, 'context', context)
+    chat.Chat.set_config(chat_id, 'context', response['context'])
 
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def watson_bot(message):
 	chat_id = message.chat.id
-	context = chat.Chat.get_config(chat_id, 'context')
 
 	response = assistant.message(
 		workspace_id=WORKSPACE_ID,
 		input={
 			'text': message.text
 		},
-		context=context
+		context=chat.Chat.get_config(chat_id, 'context')
 	)
 
 	bot.reply_to(message, response['output']['text'][0])
