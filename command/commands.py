@@ -29,7 +29,7 @@ def ref(message):
     datos = json.loads(response2.read())
     total = 0
 
-    m=bot.send_message(message.chat.id, "Listado de productos:")
+    bot.send_message(message.chat.id, "Listado de productos:")
 
     for dato in datos:
         #edit_message_text(m.chat.id, m.message_id, m.text + "\n - " + dato["label"] + float(dato["total_ttc"]) + "\u20ac")
