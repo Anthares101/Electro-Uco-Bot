@@ -25,11 +25,10 @@ def start(message):
 	)
 
 	contexto = response['context']
+	chat.Chat.set_config(message.chat.id, 'context', contexto)
 
 	bot.reply_to(message, response['output']['text'][0])
 	bot.reply_to(message, contexto)
-
-	chat.Chat.set_config(message.chat.id, 'context', response['context'])
 
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def watson_bot(message):
@@ -42,7 +41,8 @@ def watson_bot(message):
 	    context=chat.Chat.get_config(message.chat.id, 'context')
 	)
 
-	chat.Chat.set_config(message.chat.id, 'context', response['context'])
+	contexto = response['context']
+	#chat.Chat.set_config(message.chat.id, 'context', contexto)
 
 	bot.reply_to(message, response['output']['text'][0])
-	bot.reply_to(message, response['context'])
+	bot.reply_to(message, contexto)
