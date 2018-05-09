@@ -32,8 +32,7 @@ def ref(message):
     m=bot.send_message(message.chat.id, "Listado de productos:")
 
     for dato in datos:
-        total_ttc=float(dato["total_ttc"])
-        bot.send_message(message.chat.id, "\n - " + dato["label"] + total_ttc + "\u20ac")
+        bot.send_message(message.chat.id, "\n - " + dato["label"] + dato["total_ttc"] + "\u20ac")
         total = total + float(dato["total_ttc"])
 
     #respuesta=respuesta + "\nPrecio total: " + total + "\u20ac"
