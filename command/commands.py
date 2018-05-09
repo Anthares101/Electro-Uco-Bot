@@ -25,7 +25,7 @@ def start(message):
 	)
 
 	contexto = json.dumps(response['context'])
-	chat.Chat.set_config(message.chat.id, 'context_conver', contexto)
+	chat.Chat.set_config(message.chat.id, 'contexto', contexto)
 
 	bot.reply_to(message, response['output']['text'][0])
 	bot.reply_to(message, contexto)
@@ -33,20 +33,20 @@ def start(message):
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def watson_bot(message):
 
-	bot.reply_to(message, chat.Chat.get_config(message.chat.id, 'context_conver'))
+	bot.reply_to(message, chat.Chat.get_config(message.chat.id, 'contexto'))
 
 	response = assistant.message(
 	    workspace_id=WORKSPACE_ID,
 	    input={
 	        'text': message.text
 	    },
-	    context=chat.Chat.get_config(message.chat.id, 'context_conver')
+	    context=chat.Chat.get_config(message.chat.id, 'contexto')
 	)
 
-	bot.reply_to(message, chat.Chat.get_config(message.chat.id, 'context_conver'))
+	bot.reply_to(message, chat.Chat.get_config(message.chat.id, 'contexto'))
 
 	contexto = json.dumps(response['context'])
-	chat.Chat.set_config(message.chat.id, 'context_conver', contexto)
+	chat.Chat.set_config(message.chat.id, 'contexto', contexto)
 
 	bot.reply_to(message, response['output']['text'][0])
 	bot.reply_to(message, contexto)
