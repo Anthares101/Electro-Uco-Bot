@@ -39,4 +39,4 @@ def watson_bot(message):
 	contexto = json.dumps(response['context'])
 	chat.Chat.set_config(message.chat.id, 'contexto', contexto)
 
-	bot.send_message(message, response['output']['text'][0])
+	bot.send_message(message.chat.id, response['output']['text'][0])
