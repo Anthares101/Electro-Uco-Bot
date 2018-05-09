@@ -3,6 +3,7 @@ import requests
 import os
 from heroku import bot
 from telebot import util
+from model import chat
 
 
 @bot.message_handler(commands=['start'])
