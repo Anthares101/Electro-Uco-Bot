@@ -39,6 +39,6 @@ def watson_bot(message):
 		context=chat.Chat.get_config(message.chat.id, 'context')
 	)
 
-	chat.Chat.set_config(message.chat.id, 'context', response['context'])
+	#chat.Chat.set_config(message.chat.id, 'context', response['context'])
 
 	bot.reply_to(message, response['output']['text'][0])
