@@ -12,10 +12,8 @@ def start(message):
 	bot.register_next_step_handler(message, ref)
 
 def ref(message):
-	referencia = util.extract_arguments(message.text)
-    if not referencia:
-        bot.reply_to(message, "Debe indicar la referencia de pedido")
-        return
+	referencia = message.text
+
 	url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=order&userID=9&ref="+referencia
 	response = urllib.urlopen(url)
 	data = json.loads(response.read())
