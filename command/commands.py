@@ -7,7 +7,7 @@ from model import chat
 
 @bot.message_handler(commands=['start'])
 def start(message):
-	bot.reply_to(message, 'Buenas'+message.from_user.first_name+', introduzca una referencia de un pedido para ver información relativa a ese pedido')
+	bot.sendMessage(message.chat.id, 'Buenas' + message.from_user.first_name + ', introduzca una referencia de un pedido para ver información relativa a ese pedido')
 	#bot.register_next_step_handler(message, ref)
 
 """def ref(message):
