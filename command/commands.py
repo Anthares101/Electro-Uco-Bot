@@ -19,7 +19,7 @@ def ref(message):
 	response = urllib.urlopen(url)
 	data = json.loads(response.read())
 	for datos in data:
-		bot.send_message(message.chat.id,print datos['rowid'])
+		print datos['rowid']
 
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def echo_message(message):
