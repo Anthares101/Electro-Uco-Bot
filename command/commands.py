@@ -18,27 +18,27 @@ assistant = watson_developer_cloud.AssistantV1(
 
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.reply_to(message, 'Illo, ' + message.from_user.first_name)
+	bot.reply_to(message, 'Illo, ' + message.from_user.first_name)
 
-    response = assistant.message(
-		workspace_id=WORKSPACE_ID
-    )
+	response = assistant.message(
+	    workspace_id=WORKSPACE_ID
+	)
 
-    bot.reply_to(message, response['output']['text'][0])
+	bot.reply_to(message, response['output']['text'][0])
 
-    chat.Chat.set_config(message.chat.id, 'context', response['context'])
+	chat.Chat.set_config(message.chat.id, 'context', response['context'])
 
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def watson_bot(message):
 
 	response = assistant.message(
-		workspace_id=WORKSPACE_ID,
-		input={
-			'text': message.text
-		},
-		context=chat.Chat.get_config(message.chat.id, 'context')
+	    workspace_id=WORKSPACE_ID,
+	    input={
+	        'text': message.text
+	    },
+	    context=chat.Chat.get_config(message.chat.id, 'context')
 	)
 
-    chat.Chat.set_config(message.chat.id, 'context', response['context'])
+	chat.Chat.set_config(message.chat.id, 'context', response['context'])
 
 	bot.reply_to(message, response['output']['text'][0])
