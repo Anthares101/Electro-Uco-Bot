@@ -1,10 +1,7 @@
 # coding=utf-8
 import requests
 import os
-from heroku import bot
-from heroku import USERNAME
-from heroku import PASSWORD
-from heroku import WORKSPACE_ID
+from heroku import bot, USERNAME, PASSWORD, WORKSPACE_ID
 from telebot import util
 import json
 import watson_developer_cloud
@@ -18,7 +15,6 @@ assistant = watson_developer_cloud.AssistantV1(
 
 @bot.message_handler(commands=['start'])
 def start(message):
-	bot.reply_to(message, 'Illo, ' + message.from_user.first_name)
 
 	response = assistant.message(
 	    workspace_id=WORKSPACE_ID
@@ -27,32 +23,20 @@ def start(message):
 	contexto = json.dumps(response['context'])
 	chat.Chat.set_config(message.chat.id, 'contexto', contexto)
 
-	bot.reply_to(message, response['output']['text'][0])
-	bot.reply_to(message, contexto)
-
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def watson_bot(message):
 
-	bot.reply_to(message, "xd 18")
-
-	almacenamiento = chat.Chat.get_config(message.chat.id, 'contexto')
-	bot.reply_to(message, "%s" % almacenamiento)
-
-	contexto = almacenamiento.value
-	bot.reply_to(message, "%s" % contexto)
+	conetexto = chat.Chat.get_config(message.chat.id, 'contexto')
 
 	response = assistant.message(
 	    workspace_id=WORKSPACE_ID,
 	    input={
 	        'text': message.text
 	    },
-	    context=json.loads(contexto)
+	    context=json.loads(contexto.value)
 	)
-
-	#bot.reply_to(message, chat.Chat.get_config(message.chat.id, 'contexto'))
 
 	contexto = json.dumps(response['context'])
 	chat.Chat.set_config(message.chat.id, 'contexto', contexto)
 
-	bot.reply_to(message, response['output']['text'][0])
-	#bot.reply_to(message, contexto)
+	bot.send_message(message, response['output']['text'][0])
