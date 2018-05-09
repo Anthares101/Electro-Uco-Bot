@@ -7,11 +7,22 @@ from telebot import util
 
 @bot.message_handler(commands=['start'])
 def start(message):
-	if chat.Chat.get_config(chat_id, 'checkStart') != 1:
-		bot.reply_to(message, 'Buenas ' + message.from_user.first_name+', usa el comando /id para introducir su id de usuario')
-		chat.Chat.set_config(chat_id, 'checkStart', 1)
+	bot.reply_to(message, 'Buenas ' + message.from_user.first_name+', usa el comando /id para introducir su id de usuario')
+
 def id(message):
 	data = util.extract_arguments(message.text)
+	if not data:
+		bot.reply_to(message, "Debe indicar una ID de usuario")
+		return
+	chat.Chat.set_config(message.chat.id, 'memory', data)
+	bot.reply_to(message, "ID de usuario guardado, si desea consultarla use /check_id")
+
+def check_id(message):
+    data = chat.Chat.get_config(message.chat.id, 'memory')
+    if not data:
+        bot.reply_to(message, "Aún no ha introducido una ID de usuario")
+        return
+    bot.reply_to(message, "Su ID de usuario es: %s" % data.value)
 
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def echo_message(message):
