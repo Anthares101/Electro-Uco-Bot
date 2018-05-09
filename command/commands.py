@@ -33,18 +33,10 @@ def ref(message):
 
     for dato in datos:
         respuesta=respuesta + "- " + dato["label"] + " " + dato["total_ttc"] + "\u20ac\n"
-        total = total + float(dato["total_ttc"])
+        total = string(total + float(dato["total_ttc"]))
 
     bot.send_message(message.chat.id, respuesta)
-    bot.send_message(message.chat.id,"Precio total: " + string(total) + "\u20ac")
-
-    #bot.send_message(message.chat.id, respuesta)
-
-    """url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=order&userID=9&ref="+referencia
-	response = urllib.urlopen(url)
-	data = json.loads(response.read())
-	for datos in data:
-		bot.send_message(message.chat.id, datos['rowid'])"""
+    bot.send_message(message.chat.id,"Precio total: " + total + "\u20ac")
 
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def echo_message(message):
