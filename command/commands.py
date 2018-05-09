@@ -7,8 +7,9 @@ from telebot import util
 
 @bot.message_handler(commands=['start'])
 def start(message):
-	bot.reply_to(message, 'Buenas ' + message.from_user.first_name+', usa el comando /id para introducir su id de usuario')
+	bot.reply_to(message, 'Buenas ' + message.from_user.first_name+', usa el comando /id para introducir su ID de usuario')
 
+@bot.message_handler(commands=['id'])
 def id(message):
 	data = util.extract_arguments(message.text)
 	if not data:
@@ -17,6 +18,7 @@ def id(message):
 	chat.Chat.set_config(message.chat.id, 'memory', data)
 	bot.reply_to(message, "ID de usuario guardado, si desea consultarla use /check_id")
 
+@bot.message_handler(commands=['check_id'])
 def check_id(message):
     data = chat.Chat.get_config(message.chat.id, 'memory')
     if not data:
