@@ -33,6 +33,8 @@ def start(message):
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def watson_bot(message):
 
+	bot.reply_to(message, chat.Chat.get_config(message.chat.id, 'context'))
+
 	response = assistant.message(
 	    workspace_id=WORKSPACE_ID,
 	    input={
@@ -40,6 +42,8 @@ def watson_bot(message):
 	    },
 	    context=chat.Chat.get_config(message.chat.id, 'context')
 	)
+
+	bot.reply_to(message, chat.Chat.get_config(message.chat.id, 'context'))
 
 	contexto = json.dumps(response['context'])
 	chat.Chat.set_config(message.chat.id, 'context', contexto)
