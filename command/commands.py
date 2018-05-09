@@ -14,8 +14,8 @@ def start(message):
 def id(message):
 	saved = chat.Chat.get_config(message.chat.id, 'memory')
 	if saved:
-        bot.reply_to(message, "Ya ha introducido una id de usuario")
-        return
+		bot.reply_to(message, "Ya ha introducido una id de usuario")
+		return
 	data = util.extract_arguments(message.text)
 	if not data:
 		bot.reply_to(message, "Debe indicar una ID de usuario")
