@@ -29,13 +29,13 @@ def ref(message):
     datos = json.loads(response2.read())
     total = 0
 
-    bot.send_message(message.chat.id, "Listado de productos:")
+    respuesta="Listado de productos:"
 
     for dato in datos:
         respuesta=respuesta + "- " + dato["label"] + " " + dato["total_ttc"] + "\u20ac"
         total = total + float(dato["total_ttc"])
 
-    bot.send_message(message.chat.id,respuesta)
+    bot.send_message(message.chat.id, respuesta)
     #respuesta=respuesta + "\nPrecio total: " + total + "\u20ac"
 
     #bot.send_message(message.chat.id, respuesta)
