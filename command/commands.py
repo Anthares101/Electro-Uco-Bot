@@ -8,6 +8,7 @@ from heroku import WORKSPACE_ID
 from telebot import util
 import json
 import watson_developer_cloud
+from model import chat
 
 assistant = watson_developer_cloud.AssistantV1(
     username=USERNAME,
@@ -23,9 +24,9 @@ def start(message):
 		workspace_id=WORKSPACE_ID
     )
 
-	bot.reply_to(message, response['output']['text'][0])
+    bot.reply_to(message, response['output']['text'][0])
 
-	context = response['context']
+    context = response['context']
 
     chat_id = message.chat.id
     chat.Chat.set_config(chat_id, 'context', context)
