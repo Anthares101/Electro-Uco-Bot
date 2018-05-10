@@ -61,7 +61,7 @@ def ref(message):
     else:
 
         for dato in datos:
-            respuesta=str("ID del pedido: " + dato["rowid"] + "\nCodigo de referencia del pedido: " + dato["ref"] + "\nFecha del pedido: " + dato["date_commande"])
+            respuesta=str("Codigo de referencia del pedido: " + dato["ref"] + "\nFecha del pedido: " + dato["date_commande"])
         
         total = 0
 
