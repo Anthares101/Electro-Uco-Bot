@@ -38,6 +38,7 @@ def reference(message):
     url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=order&ref=" + referencia
     url2 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
     url3 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=shipping&ref=" + referencia
+
     response = urllib.urlopen(url)
     response2 = urllib.urlopen(url2)
     response3 = urllib.urlopen(url3)
@@ -46,10 +47,19 @@ def reference(message):
     datos2 = json.loads(response2.read())
     datos3 = json.loads(response3.read())
 
-    if(datos=="2" || datos2=="2" || datos3=="2"){
+    if(datos==1 or datos2==1 or datos3==1):
         bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
-    }
-    else{
+    
+    elif(datos==2 or datos2==2 or datos3==2):
+        bot.send_message(message.chat.id, "No se ha podido localizar su pedido")
+
+    elif(datos==3 or datos2==3 or datos3==3):
+        bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
+
+    elif(datos==4 or datos2==4 or datos3==4):
+        bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
+
+    else:
 
         for dato in datos:
             respuesta=str("ID del pedido: " + dato["rowid"] + "\nCodigo de referencia del pedido: " + dato["ref"] + "\nFecha del pedido: " + dato["date_commande"])
@@ -71,7 +81,6 @@ def reference(message):
             respuesta=respuesta + "\n\nEstado del pedido: " + estados[int(dato["fk_statut"])]
         
         bot.send_message(message.chat.id, respuesta)
-    }
 
     return
 
