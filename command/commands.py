@@ -47,12 +47,10 @@ def reference(message):
     for dato in datos:
         respuesta=str("ID del pedido: " + dato["rowid"] + "\nCodigo de referencia del pedido: " + dato["ref"] + "\nFecha del pedido: " + dato["date_commande"])
 
-    bot.send_message(message.chat.id, respuesta)
-
     datos = json.loads(response2.read())
     total = 0
 
-    respuesta="Listado de productos:\n\n"
+    respuesta=respuesta+"\n\n\nListado de productos:\n\n"
 
     for dato in datos:
         total_ttc=float(dato["total_ttc"])
