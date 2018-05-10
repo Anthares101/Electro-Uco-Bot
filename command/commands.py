@@ -57,11 +57,11 @@ def reference(message):
 
     bot.send_message(message.chat.id, respuesta + "\n\nPrecio total: " + str(total) + "\u20ac")
 
-    datos = json.loads(response3.read())
-    estados = { 0:"Borrador", 1:"En curso", 2:"Entregado" }
+    #datos = json.loads(response3.read())
+    #estados = { 0:"Borrador", 1:"En curso", 2:"Entregado" }
 
-    for dato in datos:
-        bot.send_message(message.chat.id,"\nEstado del pedido: ")# + estados[int(dato["fk_statut"])])
+    #for dato in datos:
+     #   bot.send_message(message.chat.id,"\nEstado del pedido: " + estados[int(dato["fk_statut"])])
     
     return
 
