@@ -61,25 +61,25 @@ def ref(message):
     else:
 
         for dato in datos:
-            respuesta=str(":date: Codigo de referencia del pedido: " + dato["ref"] + "\nFecha del pedido: " + dato["date_commande"])
+            respuesta=str("*Codigo de referencia del pedido:* " + dato["ref"] + "\n*Fecha del pedido:* " + dato["date_commande"])
         
         total = 0
 
-        respuesta=respuesta+"\n\n\nListado de productos:\n\n"
+        respuesta=respuesta+"\n\n\n*Listado de productos:*\n\n"
 
         for dato in datos2:
             total_ttc=float(dato["total_ttc"])
             respuesta=respuesta + "- " + dato["label"] + " " + str(total_ttc) + "\u20ac\n"
             total = total + float(dato["total_ttc"])
 
-        respuesta=(respuesta + "\n\nPrecio total: " + str(total) + "\u20ac")
+        respuesta=(respuesta + "\n\n*Precio total:* " + str(total) + "\u20ac")
         
-        estados = { 0:"Borrador", 1:"En curso", 2:"Entregado" }
+        estados = { 0:"_Borrador_", 1:"_En curso_", 2:"_Entregado_" }
 
         for dato in datos3:
-            respuesta=respuesta + "\n\nEstado del pedido: " + estados[int(dato["fk_statut"])]
+            respuesta=respuesta + "\n\n*Estado del pedido:* " + estados[int(dato["fk_statut"])]
         
-        bot.send_message(message.chat.id, respuesta)#, parse_mode="Markdown")
+        bot.send_message(message.chat.id, respuesta, parse_mode="Markdown")
 
     return
 
