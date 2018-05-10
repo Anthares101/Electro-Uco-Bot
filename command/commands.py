@@ -44,7 +44,7 @@ def reference(message):
     datos = json.loads(response.read())
 
     for dato in datos:
-        respuesta=respuesta+"ID del pedido: " + dato["rowid"] + "\nCodigo de referencia del pedido: " + dato["ref"] + "\nFecha del pedido: " + dato["date_commande"]
+        respuesta="ID del pedido: " + dato["rowid"] + "\nCodigo de referencia del pedido: " + dato["ref"] + "\nFecha del pedido: " + dato["date_commande"]
 
     datos = json.loads(response2.read())
     total = 0
