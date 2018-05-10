@@ -35,7 +35,7 @@ def ref(message):
 def reference(message):
     referencia = message.text
 
-    url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=order&userID=9&ref=" + referencia
+    url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=order&ref=" + referencia
     url2 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
     url3 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=shipping&ref=" + referencia
     response = urllib.urlopen(url)
@@ -62,7 +62,7 @@ def reference(message):
     estados = { 0:"Borrador", 1:"En curso", 2:"Entregado" }
 
     for dato in datos:
-        respuesta=respuesta+("\n\nEstado del pedido: " + estados[int(dato["fk_statut"])])
+        respuesta=respuesta+ str("\n\nEstado del pedido: " + estados[int(dato["fk_statut"])])
     
     bot.send_message(message.chat.id, respuesta)
 
