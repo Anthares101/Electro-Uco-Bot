@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 import requests
 import os
+import logging
 from heroku import bot, USERNAME, PASSWORD, WORKSPACE_ID
 from telebot import util
 import urllib, json
@@ -44,10 +45,10 @@ def reference(message):
     datos = json.loads(response.read())
 
     for dato in datos:
-        respuesta=("ID del pedido: " + dato["rowid"] + "\nCodigo de referencia del pedido: " + dato["ref"] + "\nFecha del pedido: " + dato["date_commande"])
+        respuesta=str("ID del pedido: " + dato["rowid"] + "\nCodigo de referencia del pedido: " + dato["ref"] + "\nFecha del pedido: " + dato["date_commande"])
 
     bot.send_message(message.chat.id, respuesta)
-    
+
     datos = json.loads(response2.read())
     total = 0
 
