@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 import requests
 import os
-import logging
 from heroku import bot, USERNAME, PASSWORD, WORKSPACE_ID
 from telebot import util
 import urllib, json
