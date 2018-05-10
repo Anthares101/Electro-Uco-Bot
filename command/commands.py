@@ -26,14 +26,13 @@ def start(message):
 
 	bot.send_message(message.chat.id, response['output']['text'][0])
 
+
 @bot.message_handler(commands=['ref'])
 def ref(message):
-	bot.send_message(message.chat.id, "Introduzca una referencia de un pedido para ver información relativa a ese pedido")
-	bot.register_next_step_handler(message, reference)
-
-#Funcion que pide informacion de un pedido en funcion de una referencia
-def reference(message):
-    referencia = message.text
+    referencia = util.extract_arguments(message.text)
+    if not referencia:
+        bot.send_message(message.chat.id, "Debe indicar la referencia del pedido")
+        return
 
     url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=order&ref=" + referencia
     url2 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
