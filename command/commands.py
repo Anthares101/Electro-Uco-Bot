@@ -41,32 +41,40 @@ def reference(message):
     response = urllib.urlopen(url)
     response2 = urllib.urlopen(url2)
     response3 = urllib.urlopen(url3)
+
     datos = json.loads(response.read())
+    datos2 = json.loads(response2.read())
+    datos3 = json.loads(response3.read())
 
-    for dato in datos:
-        respuesta=str("ID del pedido: " + dato["rowid"] + "\nCodigo de referencia del pedido: " + dato["ref"] + "\nFecha del pedido: " + dato["date_commande"])
+    if(datos=="2" || datos2=="2" || datos3=="2"){
+        bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
+    }
+    else{
 
-    datos = json.loads(response2.read())
-    total = 0
+        for dato in datos:
+            respuesta=str("ID del pedido: " + dato["rowid"] + "\nCodigo de referencia del pedido: " + dato["ref"] + "\nFecha del pedido: " + dato["date_commande"])
+        
+        total = 0
 
-    respuesta=respuesta+"\n\n\nListado de productos:\n\n"
+        respuesta=respuesta+"\n\n\nListado de productos:\n\n"
 
-    for dato in datos:
-        total_ttc=float(dato["total_ttc"])
-        respuesta=respuesta + "- " + dato["label"] + " " + str(total_ttc) + "\u20ac\n"
-        total = total + float(dato["total_ttc"])
+        for dato in datos2:
+            total_ttc=float(dato["total_ttc"])
+            respuesta=respuesta + "- " + dato["label"] + " " + str(total_ttc) + "\u20ac\n"
+            total = total + float(dato["total_ttc"])
 
-    respuesta=(respuesta + "\n\nPrecio total: " + str(total) + "\u20ac")
+        respuesta=(respuesta + "\n\nPrecio total: " + str(total) + "\u20ac")
+        
+        estados = { 0:"Borrador", 1:"En curso", 2:"Entregado" }
 
-    datos = json.loads(response3.read())
-    estados = { 0:"Borrador", 1:"En curso", 2:"Entregado" }
-
-    for dato in datos:
-        respuesta=respuesta + "\n\nEstado del pedido: " + estados[int(dato["fk_statut"])]
-    
-    bot.send_message(message.chat.id, respuesta)
+        for dato in datos3:
+            respuesta=respuesta + "\n\nEstado del pedido: " + estados[int(dato["fk_statut"])]
+        
+        bot.send_message(message.chat.id, respuesta)
+    }
 
     return
+
 
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def watson_bot(message):
