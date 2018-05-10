@@ -52,7 +52,8 @@ def reference(message):
     respuesta="Listado de productos:\n\n"
 
     for dato in datos:
-        respuesta=respuesta + "- " + dato["label"] + " " + dato["total_ttc"] + "\u20ac\n"
+        total_ttc=float(dato["total_ttc"])
+        respuesta=respuesta + "- " + dato["label"] + " " + str(total_ttc) + "\u20ac\n"
         total = total + float(dato["total_ttc"])
 
     bot.send_message(message.chat.id, respuesta + "\n\nPrecio total: " + str(total) + "\u20ac")
@@ -61,7 +62,7 @@ def reference(message):
     estados = { 0:"Borrador", 1:"En curso", 2:"Entregado" }
 
     for dato in datos:
-        bot.send_message(message.chat.id,"\nEstado del pedido: " + estados[int(dato["fk_statut"])])
+        bot.send_message(message.chat.id,"Estado del pedido: " + estados[int(dato["fk_statut"])])
     
     return
 
