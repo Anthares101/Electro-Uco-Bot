@@ -62,7 +62,7 @@ def reference(message):
     estados = { 0:"Borrador", 1:"En curso", 2:"Entregado" }
 
     for dato in datos:
-        respuesta=respuesta+ str("\n\nEstado del pedido: " + estados[int(dato["fk_statut"])])
+        respuesta=respuesta + "\n\nEstado del pedido: " + estados[int(dato["fk_statut"])]
     
     bot.send_message(message.chat.id, respuesta)
 
