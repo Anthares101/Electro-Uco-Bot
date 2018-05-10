@@ -9,12 +9,15 @@ from model import chat
 
 @bot.message_handler(commands=['start'])
 def start(message):
-	bot.send_message(message.chat.id, "Buenas, "+message.from_user.first_name)
+    bot.send_message(message.chat.id, "Buenas " + message.from_user.first_name + ", introduzca /ref para realizar la consulta de un pedido")
+
+@bot.message_handler(commands=['ref'])
+def ref(message):
 	bot.send_message(message.chat.id, "Introduzca una referencia de un pedido para ver información relativa a ese pedido")
-	bot.register_next_step_handler(message, ref)
+	bot.register_next_step_handler(message, reference)
 
 #Funcion que pide informacion de un pedido en funcion de una referencia
-def ref(message):
+def reference(message):
     referencia = message.text
 
     url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=order&userID=9&ref=" + referencia
