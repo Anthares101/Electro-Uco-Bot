@@ -69,7 +69,7 @@ def ref(message):
 
         for dato in datos2:
             total_ttc=float(dato["total_ttc"])
-            respuesta=respuesta + "- " + dato["label"] + " " + str(total_ttc) + "\u20ac\n"
+            respuesta=respuesta + "- " + "_" + dato["label"] + "_" + " " + str(total_ttc) + "\u20ac\n"
             total = total + float(dato["total_ttc"])
 
         respuesta=(respuesta + "\n\n*Precio total:* " + str(total) + "\u20ac")
@@ -80,7 +80,6 @@ def ref(message):
             respuesta=respuesta + "\n\n*Estado del pedido:* " + estados[int(dato["fk_statut"])]
         
         bot.send_message(message.chat.id, respuesta, parse_mode="Markdown")
-        bot.send_message(message.chat.id, ':date:', parse_mode="Markdown")
 
     return
 
