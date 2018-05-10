@@ -24,6 +24,8 @@ def start(message):
 	contexto = json.dumps(response['context'])
 	chat.Chat.set_config(message.chat.id, 'contexto', contexto)
 
+	bot.send_message(message.chat.id, response['output']['text'][0])
+
 @bot.message_handler(commands=['ref'])
 def ref(message):
 	bot.send_message(message.chat.id, "Introduzca una referencia de un pedido para ver información relativa a ese pedido")
