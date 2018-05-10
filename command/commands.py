@@ -79,7 +79,7 @@ def ref(message):
         for dato in datos3:
             respuesta=respuesta + "\n\nEstado del pedido: " + estados[int(dato["fk_statut"])]
         
-        bot.send_message(message.chat.id, respuesta)
+        bot.send_message(message.chat.id, respuesta, parse_mode="Markdown")
 
     return
 
