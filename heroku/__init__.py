@@ -3,7 +3,6 @@ from flask import Flask
 from telebot import TeleBot
 from dotenv import load_dotenv
 import os
-import logging
 
 load_dotenv()
 
@@ -36,7 +35,6 @@ if not PASSWORD:
     raise Exception('No se ha definido PASSWORD')
 
 bot = TeleBot(TOKEN, os.environ.get('POLLING', False))
-telebot.logger.setLevel(logging.DEBUG)
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
