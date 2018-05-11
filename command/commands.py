@@ -61,7 +61,7 @@ def ref(message):
     else:
 
         for dato in datos:
-            respuesta=str("📝 *Código de referencia del pedido:* " + dato["ref"] + "\n📆 *Fecha del pedido:* " + dato["date_commande"])
+            respuesta=str("*Código de referencia del pedido:* " + dato["ref"] + "\n*Fecha del pedido:* " + dato["date_commande"])
         
         total = 0
 
@@ -80,7 +80,7 @@ def ref(message):
             respuesta=respuesta + "\n\n🚚 *Estado del pedido:* " + estados[int(dato["fk_statut"])]
         
         bot.send_message(message.chat.id, respuesta, parse_mode="Markdown")
-
+        #📝 📆 
     return
 
 
