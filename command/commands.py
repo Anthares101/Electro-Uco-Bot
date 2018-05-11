@@ -77,7 +77,7 @@ def ref(message):
         estados = { 0:"_Borrador_", 1:"_En curso_", 2:"_Entregado_" }
 
         for dato in datos3:
-            respuesta=respuesta + "\n\n*Estado del pedido:* " + estados[int(dato["fk_statut"])]
+            respuesta=respuesta + "\n\n🚚 *Estado del pedido:* " + estados[int(dato["fk_statut"])]
         
         bot.send_message(message.chat.id, respuesta, parse_mode="Markdown")
 
