@@ -65,7 +65,7 @@ def ref(message):
         
         total = 0
 
-        respuesta=respuesta+"\n\n\n*Listado de productos:*\n\n"
+        respuesta=respuesta+"\n\n\n📋 *Listado de productos:*\n\n"
 
         for dato in datos2:
             total_ttc=float(dato["total_ttc"])
