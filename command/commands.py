@@ -72,7 +72,7 @@ def ref(message):
             respuesta=respuesta + "- " + "_" + dato["label"] + "_" + "\t\t" + "_" + str(total_ttc) + "_" + "\u20ac\n"
             total = total + float(dato["total_ttc"])
 
-        respuesta=(respuesta + "\n\n*Precio total:* " + str(total) + "\u20ac")
+        respuesta=(respuesta + "\n\n💶 *Precio total:* " + str(total) + "\u20ac")
         
         estados = { 0:"_Borrador_", 1:"_En curso_", 2:"_Entregado_" }
 
