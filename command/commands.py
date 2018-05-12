@@ -48,7 +48,7 @@ def ls(message):
         nombre = dato["label"]
         precio = float(dato["total_ttc"])
 
-        bot.send_photo(message.chat.id, datos2, caption=nombre + "\nPrecio: " + str(precio) + "\u20ac")
+        bot.send_photo(message.chat.id, datos2, caption=nombre + "\n*Precio:* " + str(precio) + "\u20ac", parse_mode="Markdown")
 
 @bot.message_handler(commands=['ref'])
 def ref(message):
