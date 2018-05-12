@@ -73,7 +73,7 @@ def ls(message):
             else:
                 nombre = dato["label"]
                 precio = float(dato["total_ttc"])
-        
+
                 bot.send_photo(message.chat.id, datos2, caption="🛒 _" + nombre + "_" + "\n💶 *Precio:* " + str(precio) + "\u20ac", parse_mode="Markdown")
 
     return
