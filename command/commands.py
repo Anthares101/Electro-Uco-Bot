@@ -17,14 +17,14 @@ assistant = watson_developer_cloud.AssistantV1(
 @bot.message_handler(commands=['start'])
 def start(message):
 
-	response = assistant.message(
+    response = assistant.message(
 	    workspace_id=WORKSPACE_ID
 	)
 
-	contexto = json.dumps(response['context'])
-	chat.Chat.set_config(message.chat.id, 'contexto', contexto)
+    contexto = json.dumps(response['context'])
+    chat.Chat.set_config(message.chat.id, 'contexto', contexto)
 
-	bot.send_message(message.chat.id, response['output']['text'][0])
+    bot.send_message(message.chat.id, response['output']['text'][0])
 
 @bot.message_handler(commands=['ls'])
 def ls(message):
@@ -33,21 +33,21 @@ def ls(message):
 		bot.send_message(message.chat.id, "Debe indicar la referencia del pedido")
 		return
 	url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
-	
+
 	response = urllib.urlopen(url)
 
 	datos = json.loads(response.read())
 
 	for dato in datos:
 		url2 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=getImage&ref=" + dato['ref']
-	
-		response2 = urllib.urlopen(url2)
 
-		datos2 = json.loads(response2.read())
+        response2 = urllib.urlopen(url2)
+
+        datos2 = json.loads(response2.read())
 
         nombre = dato["label"]
 
-		bot.send_photo(message.chat.id, datos2, caption=nombre)
+        bot.send_photo(message.chat.id, datos2, caption=nombre)
 
 @bot.message_handler(commands=['ref'])
 def ref(message):
