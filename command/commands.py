@@ -26,8 +26,8 @@ def start(message):
 
     bot.send_message(message.chat.id, response['output']['text'][0])
 
-@bot.message_handler(commands=['ls'])
-def ls(message):
+@bot.message_handler(commands=['list'])
+def list(message):
     referencia = util.extract_arguments(message.text)
     if not referencia:
         bot.send_message(message.chat.id, "Debe indicar la referencia del pedido")
@@ -78,8 +78,8 @@ def ls(message):
 
     return
 
-@bot.message_handler(commands=['ref'])
-def ref(message):
+@bot.message_handler(commands=['info'])
+def info(message):
     referencia = util.extract_arguments(message.text)
     if not referencia:
         bot.send_message(message.chat.id, "Debe indicar la referencia del pedido")
