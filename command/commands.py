@@ -28,18 +28,18 @@ def start(message):
 
 @bot.message_handler(commands=['ls'])
 def ls(message):
-	referencia = util.extract_arguments(message.text)
-	if not referencia:
-		bot.send_message(message.chat.id, "Debe indicar la referencia del pedido")
-		return
-	url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
+    referencia = util.extract_arguments(message.text)
+    if not referencia:
+        bot.send_message(message.chat.id, "Debe indicar la referencia del pedido")
+        return
+    url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
 
-	response = urllib.urlopen(url)
+    response = urllib.urlopen(url)
 
-	datos = json.loads(response.read())
+    datos = json.loads(response.read())
 
-	for dato in datos:
-		url2 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=getImage&ref=" + dato['ref']
+    for dato in datos:
+        url2 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=getImage&ref=" + dato['ref']
 
         response2 = urllib.urlopen(url2)
 
