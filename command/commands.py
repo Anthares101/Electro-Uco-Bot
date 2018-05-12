@@ -46,9 +46,9 @@ def ls(message):
         datos2 = json.loads(response2.read())
 
         nombre = dato["label"]
-        precio = dato["total_ttc"]
+        precio = float(dato["total_ttc"])
 
-        bot.send_photo(message.chat.id, datos2, caption=nombre + "\n\n" + precio)
+        bot.send_photo(message.chat.id, datos2, caption=nombre + "\nPrecio: " + str(precio) + "\u20ac")
 
 @bot.message_handler(commands=['ref'])
 def ref(message):
