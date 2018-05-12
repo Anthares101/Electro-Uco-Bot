@@ -17,18 +17,69 @@ assistant = watson_developer_cloud.AssistantV1(
 @bot.message_handler(commands=['start'])
 def start(message):
 
-	response = assistant.message(
+    response = assistant.message(
 	    workspace_id=WORKSPACE_ID
 	)
 
-	contexto = json.dumps(response['context'])
-	chat.Chat.set_config(message.chat.id, 'contexto', contexto)
+    contexto = json.dumps(response['context'])
+    chat.Chat.set_config(message.chat.id, 'contexto', contexto)
 
-	bot.send_message(message.chat.id, response['output']['text'][0])
+    bot.send_message(message.chat.id, response['output']['text'][0])
 
+@bot.message_handler(commands=['list'])
+def list(message):
+    referencia = util.extract_arguments(message.text)
+    if not referencia:
+        bot.send_message(message.chat.id, "Debe indicar la referencia del pedido")
+        return
+    url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
 
-@bot.message_handler(commands=['ref'])
-def ref(message):
+    response = urllib.urlopen(url)
+
+    datos = json.loads(response.read())
+
+    if (datos == 1):
+        bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
+
+    elif (datos == 2):
+        bot.send_message(message.chat.id, "No se ha podido localizar su pedido")
+
+    elif (datos == 3):
+        bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
+
+    elif (datos == 4):
+        bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
+
+    else:
+        for dato in datos:
+            url2 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=getImage&ref=" + dato['ref']
+
+            response2 = urllib.urlopen(url2)
+
+            datos2 = json.loads(response2.read())
+
+            if (datos2 == 1):
+                bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
+
+            elif (datos2 == 2):
+                bot.send_message(message.chat.id, "No se ha podido localizar su pedido")
+
+            elif (datos2 == 3):
+                bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
+
+            elif (datos2 == 4):
+                bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
+
+            else:
+                nombre = dato["label"]
+                precio = float(dato["total_ttc"])
+
+                bot.send_photo(message.chat.id, datos2, caption="🛒 _" + nombre + "_" + "\n💶 *Precio:* " + str(precio) + "\u20ac", parse_mode="Markdown")
+
+    return
+
+@bot.message_handler(commands=['info'])
+def info(message):
     referencia = util.extract_arguments(message.text)
     if not referencia:
         bot.send_message(message.chat.id, "Debe indicar la referencia del pedido")
