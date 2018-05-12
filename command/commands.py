@@ -16,7 +16,6 @@ assistant = watson_developer_cloud.AssistantV1(
 
 @bot.message_handler(commands=['start'])
 def start(message):
-
     response = assistant.message(
 	    workspace_id=WORKSPACE_ID
 	)
@@ -25,6 +24,7 @@ def start(message):
     chat.Chat.set_config(message.chat.id, 'contexto', contexto)
 
     bot.send_message(message.chat.id, response['output']['text'][0])
+
 
 @bot.message_handler(commands=['list'])
 def list(message):
