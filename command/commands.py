@@ -45,7 +45,7 @@ def ls(message):
 
 		datos2 = json.loads(response2.read())
 
-		bot.send_photo(message.chat.id, datos2)
+		bot.send_photo(message.chat.id, datos2, caption="hola")
 
 @bot.message_handler(commands=['ref'])
 def ref(message):
