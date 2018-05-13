@@ -158,6 +158,7 @@ def info(message):
 def watson_bot(message):
 
 	contexto = chat.Chat.get_config(message.chat.id, 'contexto').value
+	contexto = json.loads(contexto)
 
 	referencia = chat.Chat.get_config(message.chat.id, 'referencia').value
 	if referencia:
@@ -168,7 +169,7 @@ def watson_bot(message):
 	    input={
 	        'text': message.text
 	    },
-	    context=json.loads(contexto)
+	    context=contexto
 	)
 
 	if response['context']['mostrar_pedido'] == "true":
