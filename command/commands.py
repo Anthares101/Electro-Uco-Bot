@@ -30,10 +30,9 @@ def start(message):
 def list(message):
     referencia = util.extract_arguments(message.text)
     if not referencia:
-	referencia = chat.Chat.get_config(message.chat.id, 'referencia').value
+	referencia = chat.Chat.get_config(message.chat.id, 'referencia2').value
 
 	if not referencia:
-
 		bot.send_message(message.chat.id, "Debe indicar la referencia del pedido")
 		return
 
@@ -57,7 +56,7 @@ def list(message):
 
     else:
 
-	chat.Chat.set_config(message.chat.id, 'referencia', referencia)
+	chat.Chat.set_config(message.chat.id, 'referencia2', referencia)
 
         for dato in datos:
             url2 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=getImage&ref=" + dato['ref']
@@ -95,10 +94,9 @@ def list(message):
 def info(message):
     referencia = util.extract_arguments(message.text)
     if not referencia:
-	referencia = chat.Chat.get_config(message.chat.id, 'referencia').value
+	referencia = chat.Chat.get_config(message.chat.id, 'referencia2').value
 
 	if not referencia:
-
 		bot.send_message(message.chat.id, "Debe indicar la referencia del pedido")
 		return
 
@@ -128,7 +126,7 @@ def info(message):
 
     else:
 
-	chat.Chat.set_config(message.chat.id, 'referencia', referencia)
+	chat.Chat.set_config(message.chat.id, 'referencia2', referencia)
 
         for dato in datos:
             respuesta=("📝 *Codigo de referencia del pedido:* " + str(dato["ref"]) + "\n📆 *Fecha del pedido:* " + str(dato["date_commande"]))
@@ -160,7 +158,7 @@ def watson_bot(message):
 	contexto = chat.Chat.get_config(message.chat.id, 'contexto').value
 	contexto = json.loads(contexto)
 
-	referencia = chat.Chat.get_config(message.chat.id, 'referencia').value
+	referencia = chat.Chat.get_config(message.chat.id, 'referencia2').value
 	if referencia:
 		contexto['hay_pedido'] = "true"
 
@@ -173,8 +171,6 @@ def watson_bot(message):
 	)
 
 	if response['context']['mostrar_pedido'] == "true":
-	    referencia = chat.Chat.get_config(message.chat.id, 'referencia').value
-
 	    url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
 
 	    response = urllib.urlopen(url)
