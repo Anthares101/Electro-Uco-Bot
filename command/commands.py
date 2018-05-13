@@ -55,13 +55,13 @@ def list(message):
         bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
 
     else:
-	contexto = chat.Chat.get_config(message.chat.id, 'contexto')
-	context = json.loads(contexto.value)
-	context['hay_pedido'] = "true"
-	contexto = json.dumps(response['context'])
-	chat.Chat.set_config(message.chat.id, 'contexto', contexto)
+        contexto = chat.Chat.get_config(message.chat.id, 'contexto')
+        context = json.loads(contexto.value)
+        context['hay_pedido'] = "true"
+        contexto = json.dumps(response['context'])
+        chat.Chat.set_config(message.chat.id, 'contexto', contexto)
 
-	chat.Chat.set_config(message.chat.id, 'referencia', referencia)
+        chat.Chat.set_config(message.chat.id, 'referencia', referencia)
 
         for dato in datos:
             url2 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=getImage&ref=" + dato['ref']
@@ -131,13 +131,13 @@ def info(message):
         bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
 
     else:
-	contexto = chat.Chat.get_config(message.chat.id, 'contexto')
-	context = json.loads(contexto.value)
-	context['hay_pedido'] = "true"
-	contexto = json.dumps(response['context'])
-	chat.Chat.set_config(message.chat.id, 'contexto', contexto)
+        contexto = chat.Chat.get_config(message.chat.id, 'contexto')
+        context = json.loads(contexto.value)
+        context['hay_pedido'] = "true"
+        contexto = json.dumps(response['context'])
+        chat.Chat.set_config(message.chat.id, 'contexto', contexto)
 
-	chat.Chat.set_config(message.chat.id, 'referencia', referencia)
+        chat.Chat.set_config(message.chat.id, 'referencia', referencia)
 
         for dato in datos:
             respuesta=("📝 *Codigo de referencia del pedido:* " + str(dato["ref"]) + "\n📆 *Fecha del pedido:* " + str(dato["date_commande"]))
