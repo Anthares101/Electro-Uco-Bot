@@ -75,7 +75,7 @@ class Chat(db.Model):
         record = db.session.query(Chat).filter_by(chat=chat, key=key).first()
 
 	if record is not None:
-		db.session.query(Chat).filter_by(chat=chat, key=key).first().delete()
+		db.session.query(Chat).filter_by(chat=chat, key=key).delete()
 
 	db.session.commit()
         db.session.close()
