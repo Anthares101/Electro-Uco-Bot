@@ -31,7 +31,6 @@ def list(message):
     referencia = util.extract_arguments(message.text)
     if not referencia:
 	referencia = chat.Chat.get_config(message.chat.id, 'referencia2').value
-
 	if not referencia:
 		bot.send_message(message.chat.id, "Debe indicar la referencia del pedido")
 		return
@@ -92,10 +91,11 @@ def list(message):
 
 @bot.message_handler(commands=['info'])
 def info(message):
+    bot.send_message(message.chat.id, "Prueba 1")
     referencia = util.extract_arguments(message.text)
     if not referencia:
+	bot.send_message(message.chat.id, "Prueba 2")
 	referencia = chat.Chat.get_config(message.chat.id, 'referencia2').value
-
 	if not referencia:
 		bot.send_message(message.chat.id, "Debe indicar la referencia del pedido")
 		return
