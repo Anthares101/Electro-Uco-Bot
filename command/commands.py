@@ -157,16 +157,18 @@ def info(message):
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def watson_bot(message):
 
-	contexto = chat.Chat.get_config(message.chat.id, 'contexto')
+	contexto = chat.Chat.get_config(message.chat.id, 'contexto').value
 
 	referencia = chat.Chat.get_config(message.chat.id, 'referencia').value
+	if referencia:
+		contexto['hay_pedido'] = "true"
 
 	response = assistant.message(
 	    workspace_id=WORKSPACE_ID,
 	    input={
 	        'text': message.text
 	    },
-	    context=json.loads(contexto.value)
+	    context=json.loads(contexto)
 	)
 
 	if response['context']['mostrar_pedido'] == "true":
