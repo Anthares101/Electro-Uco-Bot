@@ -30,8 +30,12 @@ def start(message):
 def list(message):
     referencia = util.extract_arguments(message.text)
     if not referencia:
-        bot.send_message(message.chat.id, "Debe indicar la referencia del pedido")
-        return
+	referencia = chat.Chat.get_config(message.chat.id, 'referencia').value
+
+	if not referencia:
+
+		bot.send_message(message.chat.id, "Debe indicar la referencia del pedido")
+		return
     url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
 
     response = urllib.urlopen(url)
@@ -51,6 +55,8 @@ def list(message):
         bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
 
     else:
+	chat.Chat.set_config(message.chat.id, 'referencia', referencia)
+
         for dato in datos:
             url2 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=getImage&ref=" + dato['ref']
             url3 = "https://www.ucotest.es/panel/webservice/consultabot.php?ref=" + dato['ref'] + "&case=urlshop"
@@ -87,8 +93,12 @@ def list(message):
 def info(message):
     referencia = util.extract_arguments(message.text)
     if not referencia:
-        bot.send_message(message.chat.id, "Debe indicar la referencia del pedido")
-        return
+	referencia = chat.Chat.get_config(message.chat.id, 'referencia').value
+
+	if not referencia:
+
+		bot.send_message(message.chat.id, "Debe indicar la referencia del pedido")
+		return
 
     url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=order&ref=" + referencia
     url2 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
@@ -115,6 +125,7 @@ def info(message):
         bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
 
     else:
+	chat.Chat.set_config(message.chat.id, 'referencia', referencia)
 
         for dato in datos:
             respuesta=("📝 *Codigo de referencia del pedido:* " + str(dato["ref"]) + "\n📆 *Fecha del pedido:* " + str(dato["date_commande"]))
