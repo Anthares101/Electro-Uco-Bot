@@ -104,8 +104,6 @@ def info(message):
 	else:
 		referencia = referencia.value
 
-    referencia = referencia.value
-
     url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=order&ref=" + referencia
     url2 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
     url3 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=shipping&ref=" + referencia
