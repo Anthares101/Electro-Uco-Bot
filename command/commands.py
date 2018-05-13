@@ -177,7 +177,71 @@ def watson_bot(message):
 	    context=json.loads(contexto.value)
 	)
 
+	if response['context']['mostrar_pedido'] == "true":
+	    referencia = chat.Chat.get_config(message.chat.id, 'referencia').value
+
+	    url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
+
+	    response = urllib.urlopen(url)
+
+	    datos = json.loads(response.read())
+
+	    if (datos == 1):
+		bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
+
+	    elif (datos == 2):
+		bot.send_message(message.chat.id, "No se ha podido localizar su pedido")
+
+	    elif (datos == 3):
+		bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
+
+	    elif (datos == 4):
+		bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
+
+	    else:
+		context = chat.Chat.get_config(message.chat.id, 'contexto')
+		context = json.loads(context.value)
+		context['hay_pedido'] = "true"
+		context = json.dumps(context)
+		chat.Chat.set_config(message.chat.id, 'contexto', context)
+
+		chat.Chat.set_config(message.chat.id, 'referencia', referencia)
+
+		for dato in datos:
+		    url2 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=getImage&ref=" + dato['ref']
+		    url3 = "https://www.ucotest.es/panel/webservice/consultabot.php?ref=" + dato['ref'] + "&case=urlshop"
+
+		    response2 = urllib.urlopen(url2)
+		    response3 = urllib.urlopen(url3)
+
+		    datos2 = json.loads(response2.read())
+		    datos3 = json.loads(response3.read())
+
+		    if (datos2 == 1 or datos3 == 1):
+		        bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
+
+		    elif (datos2 == 2 or datos3 == 2):
+		        bot.send_message(message.chat.id, "No se ha podido localizar su pedido")
+
+		    elif (datos2 == 3 or datos3 == 3):
+		        bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
+
+		    elif (datos2 == 4 or datos3 == 4):
+		        bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
+
+		    else:
+		        nombre = dato["label"]
+		        precio = float(dato["total_ttc"])
+		        link = datos3
+
+		        bot.send_photo(message.chat.id, datos2, caption="🛒 _" + nombre + "_" + "\n💶 *Precio:* " + str(precio) + "\u20ac", parse_mode="Markdown")
+		        bot.send_message(message.chat.id, link)
+
+	    response['context']['mostrar_pedido'] == "false"
+	else:
+	    bot.send_message(message.chat.id, response['output']['text'][0])
+
 	contexto = json.dumps(response['context'])
 	chat.Chat.set_config(message.chat.id, 'contexto', contexto)
 
-	bot.send_message(message.chat.id, response['output']['text'][0])
+
