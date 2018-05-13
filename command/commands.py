@@ -128,7 +128,7 @@ def info(message):
     else:
         contexto = chat.Chat.get_config(message.chat.id, 'contexto')
         context = json.loads(contexto.value)
-        context['hay_pedido'] = "true"
+        #context['hay_pedido'] = "true"
         contexto = json.dumps(response['context'])
         chat.Chat.set_config(message.chat.id, 'contexto', contexto)
 
