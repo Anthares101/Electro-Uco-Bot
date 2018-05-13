@@ -95,10 +95,12 @@ def info(message):
     referencia = util.extract_arguments(message.text)
     if not referencia:
 	bot.send_message(message.chat.id, "Prueba 2")
-	referencia = chat.Chat.get_config(message.chat.id, 'referencia2').value
+	referencia = chat.Chat.get_config(message.chat.id, 'referencia2')
 	if not referencia:
 		bot.send_message(message.chat.id, "Debe indicar la referencia del pedido")
 		return
+
+    referencia = referencia.value
 
     url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=order&ref=" + referencia
     url2 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
