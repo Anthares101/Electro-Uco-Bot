@@ -56,6 +56,12 @@ def list(message):
         bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
 
     else:
+        context = chat.Chat.get_config(message.chat.id, 'contexto')
+        context = json.loads(context.value)
+        context['hay_pedido'] = "true"
+        context = json.dumps(context)
+        chat.Chat.set_config(message.chat.id, 'contexto', context)
+
 	chat.Chat.set_config(message.chat.id, 'referencia', referencia)
 
         for dato in datos:
