@@ -53,6 +53,7 @@ def list(message):
     else:
         for dato in datos:
             url2 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=getImage&ref=" + dato['ref']
+<<<<<<< HEAD
 
             response2 = urllib.urlopen(url2)
 
@@ -68,13 +69,40 @@ def list(message):
                 bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
 
             elif (datos2 == 4):
+=======
+            url3 = "https://www.ucotest.es/panel/webservice/consultabot.php?ref=" + dato['ref'] + "&case=urlshop"
+
+            response2 = urllib.urlopen(url2)
+            response3 = urllib.urlopen(url3)
+
+            datos2 = json.loads(response2.read())
+            datos3 = json.loads(response3.read())
+
+            if (datos2 == 1 or datos3 == 1):
+                bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
+
+            elif (datos2 == 2 or datos3 == 2):
+                bot.send_message(message.chat.id, "No se ha podido localizar su pedido")
+
+            elif (datos2 == 3 or datos3 == 3):
+                bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
+
+            elif (datos2 == 4 or datos3 == 4):
+>>>>>>> testing3
                 bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
 
             else:
                 nombre = dato["label"]
                 precio = float(dato["total_ttc"])
+<<<<<<< HEAD
 
                 bot.send_photo(message.chat.id, datos2, caption="🛒 _" + nombre + "_" + "\n💶 *Precio:* " + str(precio) + "\u20ac", parse_mode="Markdown")
+=======
+                link = datos3
+
+                bot.send_photo(message.chat.id, datos2, caption="🛒 _" + nombre + "_" + "\n💶 *Precio:* " + str(precio) + "\u20ac", parse_mode="Markdown")
+                bot.send_message(message.chat.id, link)
+>>>>>>> testing3
 
     return
 
