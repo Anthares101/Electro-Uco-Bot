@@ -36,8 +36,8 @@ def list(message):
 	if not referencia:
 		bot.send_message(message.chat.id, "Debe indicar la referencia del pedido")
 		return
-
-    referencia = referencia.value
+	else:
+		referencia = referencia.value
 
     url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
 
@@ -101,6 +101,8 @@ def info(message):
 	if not referencia:
 		bot.send_message(message.chat.id, "Debe indicar la referencia del pedido")
 		return
+	else:
+		referencia = referencia.value
 
     referencia = referencia.value
 
