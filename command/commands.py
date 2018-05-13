@@ -53,7 +53,7 @@ def list(message):
     else:
         for dato in datos:
             url2 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=getImage&ref=" + dato['ref']
-            url3 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=urlshop&ref=" + dato['ref']
+            url3 = "https://www.ucotest.es/panel/webservice/consultabot.php?ref=" + dato['ref'] + "&case=urlshop"
 
             response2 = urllib.urlopen(url2)
             response3 = urllib.urlopen(url3)
