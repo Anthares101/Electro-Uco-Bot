@@ -56,11 +56,11 @@ def list(message):
         bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
 
     else:
-        context = chat.Chat.get_config(message.chat.id, 'contexto')
+ """       context = chat.Chat.get_config(message.chat.id, 'contexto')
         context = json.loads(context.value)
         context['hay_pedido'] = "true"
         context = json.dumps(context)
-        chat.Chat.set_config(message.chat.id, 'contexto', context)
+        chat.Chat.set_config(message.chat.id, 'contexto', context)"""
 
 	chat.Chat.set_config(message.chat.id, 'referencia', referencia)
 
@@ -132,11 +132,11 @@ def info(message):
         bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
 
     else:
-        context = chat.Chat.get_config(message.chat.id, 'contexto')
+"""        context = chat.Chat.get_config(message.chat.id, 'contexto')
         context = json.loads(context.value)
         context['hay_pedido'] = "true"
         context = json.dumps(context)
-        chat.Chat.set_config(message.chat.id, 'contexto', context)
+        chat.Chat.set_config(message.chat.id, 'contexto', context)"""
 
 	chat.Chat.set_config(message.chat.id, 'referencia', referencia)
 
@@ -168,6 +168,11 @@ def info(message):
 def watson_bot(message):
 
 	contexto = chat.Chat.get_config(message.chat.id, 'contexto')
+
+	referencia = chat.Chat.get_config(message.chat.id, 'referencia').value
+
+	if referencia:
+		contexto['hay_pedido'] = "true"
 
 	response = assistant.message(
 	    workspace_id=WORKSPACE_ID,
