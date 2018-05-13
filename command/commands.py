@@ -161,7 +161,8 @@ def watson_bot(message):
 
 	referencia = chat.Chat.get_config(message.chat.id, 'referencia').value
 
-	if referencia:
+	if not referencia:
+	else:
 		contexto['hay_pedido'] = "true"
 
 	response = assistant.message(
