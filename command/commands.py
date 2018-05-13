@@ -71,10 +71,10 @@ def list(message):
                 bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
 
             elif (datos2 == 4 or datos3 == 4):
-		bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
+                bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
 		
             else:
-		nombre = dato["label"]
+                nombre = dato["label"]
                 precio = float(dato["total_ttc"])
                 link = datos3
 
