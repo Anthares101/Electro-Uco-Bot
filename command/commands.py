@@ -23,6 +23,8 @@ def start(message):
     contexto = json.dumps(response['context'])
     chat.Chat.set_config(message.chat.id, 'contexto', contexto)
 
+    chat.Chat.del_config(message.chat.id, 'referencia')
+
     bot.send_message(message.chat.id, response['output']['text'][0])
 
 
