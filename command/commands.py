@@ -17,8 +17,8 @@ assistant = watson_developer_cloud.AssistantV1(
 @bot.message_handler(commands=['start'])
 def start(message):
     response = assistant.message(
-	    workspace_id=WORKSPACE_ID
-	)
+        workspace_id=WORKSPACE_ID
+    )
 
     contexto = json.dumps(response['context'])
     chat.Chat.set_config(message.chat.id, 'contexto', contexto)
@@ -32,7 +32,7 @@ def start(message):
 def list(message):
     referencia = util.extract_arguments(message.text)
     if not referencia:
-	referencia = chat.Chat.get_config(message.chat.id, 'referencia')
+        referencia = chat.Chat.get_config(message.chat.id, 'referencia')
         if not referencia:
             bot.send_message(message.chat.id, "Debe indicar la referencia del pedido")
             return
@@ -97,7 +97,7 @@ def list(message):
 def info(message):
     referencia = util.extract_arguments(message.text)
     if not referencia:
-    referencia = chat.Chat.get_config(message.chat.id, 'referencia')
+        referencia = chat.Chat.get_config(message.chat.id, 'referencia')
         if not referencia:
             bot.send_message(message.chat.id, "Debe indicar la referencia del pedido")
             return
@@ -159,21 +159,21 @@ def info(message):
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def watson_bot(message):
 
-	contexto = chat.Chat.get_config(message.chat.id, 'contexto').value
-	contexto = json.loads(contexto)
+    contexto = chat.Chat.get_config(message.chat.id, 'contexto').value
+    contexto = json.loads(contexto)
 
-	referencia = chat.Chat.get_config(message.chat.id, 'referencia')
-	if referencia:
-		referencia = referencia.value
-		contexto['hay_pedido'] = "true"
+    referencia = chat.Chat.get_config(message.chat.id, 'referencia')
+    if referencia:
+        referencia = referencia.value
+        contexto['hay_pedido'] = "true"
 
-	response = assistant.message(
-	    workspace_id=WORKSPACE_ID,
-	    input={
-	        'text': message.text
-	    },
-	    context=contexto
-	)
+    response = assistant.message(
+        workspace_id=WORKSPACE_ID,
+        input={
+            'text': message.text
+        },
+        context=contexto
+    )
 
 	if response['context']['mostrar_pedido'] == "true":
         url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=order&ref=" + referencia
@@ -229,5 +229,5 @@ def watson_bot(message):
     else:
         bot.send_message(message.chat.id, response['output']['text'][0])
 
-	contexto = json.dumps(response['context'])
-	chat.Chat.set_config(message.chat.id, 'contexto', contexto)
+    contexto = json.dumps(response['context'])
+    chat.Chat.set_config(message.chat.id, 'contexto', contexto)
