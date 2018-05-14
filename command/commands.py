@@ -78,12 +78,11 @@ def list(message):
                 precio = float(dato["total_ttc"])
                 link = datos3
 
-                var="El usuario con id " + str(message.chat.id) + " ha hecho una peticion de listado de productos del pedido con referencia " + referencia
-                url4="https://www.ucotest.es/panel/webservice/consultabot.php?case=log&men="+var
-                urllib.urlopen(url4)
-
                 bot.send_photo(message.chat.id, datos2, caption="🛒 _" + nombre + "_" + "\n💶 *Precio:* " + str(precio) + "\u20ac", parse_mode="Markdown")
                 bot.send_message(message.chat.id, link)
+    var="El usuario con id " + str(message.chat.id) + " ha hecho una peticion de listado de productos del pedido con referencia " + referencia
+    url4="https://www.ucotest.es/panel/webservice/consultabot.php?case=log&men="+var
+    urllib.urlopen(url4)
     return
 
 @bot.message_handler(commands=['info'])
