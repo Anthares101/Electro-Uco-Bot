@@ -233,10 +233,10 @@ def watson_bot(message):
 
             bot.send_message(message.chat.id, respuesta, parse_mode="Markdown")
 
-        response['context']['mostrar_pedido'] == "false"
-
         url4 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=log&men=" + "Test"
         urllib.urlopen(url4)
+
+        response['context']['mostrar_pedido'] == "false"
     else:
         bot.send_message(message.chat.id, response['output']['text'][0])
 
