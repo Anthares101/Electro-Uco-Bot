@@ -138,11 +138,10 @@ def info(message):
         for dato in datos3:
             respuesta=respuesta + "\n\n🚚 *Estado del pedido:* " + estados[int(dato["fk_statut"])]
 
-        var="El usuario con id " + str(message.chat.id) + " ha hecho una peticion de información del pedido con referencia " + referencia
-        url4="https://www.ucotest.es/panel/webservice/consultabot.php?case=log&men="+var
-        urllib.urlopen(url4)
         bot.send_message(message.chat.id, respuesta, parse_mode="Markdown")
-
+    var="El usuario con id " + str(message.chat.id) + " ha hecho una peticion de información del pedido con referencia " + referencia
+    url4="https://www.ucotest.es/panel/webservice/consultabot.php?case=log&men="+var
+    urllib.urlopen(url4)
     return
 
 
