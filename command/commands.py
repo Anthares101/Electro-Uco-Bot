@@ -132,8 +132,8 @@ def info(message):
 
         chat.Chat.set_config(message.chat.id, 'referencia', referencia)
 
-            for dato in datos:
-                respuesta=("📝 *Codigo de referencia del pedido:* " + str(dato["ref"]) + "\n📆 *Fecha del pedido:* " + str(dato["date_commande"]))
+        for dato in datos:
+            respuesta=("📝 *Codigo de referencia del pedido:* " + str(dato["ref"]) + "\n📆 *Fecha del pedido:* " + str(dato["date_commande"]))
 
             total = 0
 
@@ -175,7 +175,7 @@ def watson_bot(message):
         context=contexto
     )
 
-	if response['context']['mostrar_pedido'] == "true":
+    if response['context']['mostrar_pedido'] == "true":
         url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=order&ref=" + referencia
         url2 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
         url3 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=shipping&ref=" + referencia
