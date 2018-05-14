@@ -234,6 +234,10 @@ def watson_bot(message):
             bot.send_message(message.chat.id, respuesta, parse_mode="Markdown")
 
         response['context']['mostrar_pedido'] == "false"
+
+        var = "El usuario con id " + str(message.chat.id) + " ha hecho una peticion de informacion del pedido con referencia " + referencia
+        url4 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=log&men=" + var
+        urllib.urlopen(url4)
     else:
         bot.send_message(message.chat.id, response['output']['text'][0])
 
