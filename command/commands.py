@@ -33,11 +33,11 @@ def list(message):
     referencia = util.extract_arguments(message.text)
     if not referencia:
 	referencia = chat.Chat.get_config(message.chat.id, 'referencia')
-	if not referencia:
-		bot.send_message(message.chat.id, "Debe indicar la referencia del pedido")
-		return
-	else:
-		referencia = referencia.value
+        if not referencia:
+            bot.send_message(message.chat.id, "Debe indicar la referencia del pedido")
+            return
+        else:
+            referencia = referencia.value
 
     url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
 
@@ -59,7 +59,7 @@ def list(message):
 
     else:
 
-	chat.Chat.set_config(message.chat.id, 'referencia', referencia)
+        chat.Chat.set_config(message.chat.id, 'referencia', referencia)
 
         for dato in datos:
             url2 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=getImage&ref=" + dato['ref']
@@ -97,12 +97,12 @@ def list(message):
 def info(message):
     referencia = util.extract_arguments(message.text)
     if not referencia:
-	referencia = chat.Chat.get_config(message.chat.id, 'referencia')
-	if not referencia:
-		bot.send_message(message.chat.id, "Debe indicar la referencia del pedido")
-		return
-	else:
-		referencia = referencia.value
+    referencia = chat.Chat.get_config(message.chat.id, 'referencia')
+        if not referencia:
+            bot.send_message(message.chat.id, "Debe indicar la referencia del pedido")
+            return
+        else:
+            referencia = referencia.value
 
     url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=order&ref=" + referencia
     url2 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
@@ -130,28 +130,28 @@ def info(message):
 
     else:
 
-	chat.Chat.set_config(message.chat.id, 'referencia', referencia)
+        chat.Chat.set_config(message.chat.id, 'referencia', referencia)
 
-        for dato in datos:
-            respuesta=("📝 *Codigo de referencia del pedido:* " + str(dato["ref"]) + "\n📆 *Fecha del pedido:* " + str(dato["date_commande"]))
-        
-        total = 0
+            for dato in datos:
+                respuesta=("📝 *Codigo de referencia del pedido:* " + str(dato["ref"]) + "\n📆 *Fecha del pedido:* " + str(dato["date_commande"]))
 
-        respuesta=respuesta+"\n\n\n📋 *Listado de productos:*\n\n"
+            total = 0
 
-        for dato in datos2:
-            total_ttc=float(dato["total_ttc"])
-            respuesta=respuesta + "- " + "_" + dato["label"] + "_" + "\t\t" + "_" + str(total_ttc) + "_" + "\u20ac\n"
-            total = total + float(dato["total_ttc"])
+            respuesta=respuesta+"\n\n\n📋 *Listado de productos:*\n\n"
 
-        respuesta=(respuesta + "\n\n💶 *Precio total:* " + str(total) + "\u20ac")
-        
-        estados = { 0:"_Borrador_", 1:"_En curso_", 2:"_Entregado_" }
+            for dato in datos2:
+                total_ttc=float(dato["total_ttc"])
+                respuesta=respuesta + "- " + "_" + dato["label"] + "_" + "\t\t" + "_" + str(total_ttc) + "_" + "\u20ac\n"
+                total = total + float(dato["total_ttc"])
 
-        for dato in datos3:
-            respuesta=respuesta + "\n\n🚚 *Estado del pedido:* " + estados[int(dato["fk_statut"])]
-        
-        bot.send_message(message.chat.id, respuesta, parse_mode="Markdown")
+            respuesta=(respuesta + "\n\n💶 *Precio total:* " + str(total) + "\u20ac")
+
+            estados = { 0:"_Borrador_", 1:"_En curso_", 2:"_Entregado_" }
+
+            for dato in datos3:
+                respuesta=respuesta + "\n\n🚚 *Estado del pedido:* " + estados[int(dato["fk_statut"])]
+
+            bot.send_message(message.chat.id, respuesta, parse_mode="Markdown")
 
     return
 
@@ -202,7 +202,7 @@ def watson_bot(message):
 
         else:
 
-        chat.Chat.set_config(message.chat.id, 'referencia', referencia)
+            chat.Chat.set_config(message.chat.id, 'referencia', referencia)
 
             for dato in datos:
                 respuesta=("📝 *Codigo de referencia del pedido:* " + str(dato["ref"]) + "\n📆 *Fecha del pedido:* " + str(dato["date_commande"]))
@@ -225,11 +225,9 @@ def watson_bot(message):
 
             bot.send_message(message.chat.id, respuesta, parse_mode="Markdown")
 
-	    response['context']['mostrar_pedido'] == "false"
-	else:
-	    bot.send_message(message.chat.id, response['output']['text'][0])
+        response['context']['mostrar_pedido'] == "false"
+    else:
+        bot.send_message(message.chat.id, response['output']['text'][0])
 
 	contexto = json.dumps(response['context'])
 	chat.Chat.set_config(message.chat.id, 'contexto', contexto)
-
-
