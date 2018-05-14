@@ -82,7 +82,7 @@ def list(message):
 
             elif (datos2 == 4 or datos3 == 4):
                 bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
-
+		
             else:
                 nombre = dato["label"]
                 precio = float(dato["total_ttc"])
@@ -90,6 +90,10 @@ def list(message):
 
                 bot.send_photo(message.chat.id, datos2, caption="🛒 _" + nombre + "_" + "\n💶 *Precio:* " + str(precio) + "\u20ac", parse_mode="Markdown")
                 bot.send_message(message.chat.id, link)
+
+    var="El usuario con id " + str(message.chat.id) + " ha hecho una peticion de listado de productos del pedido con referencia " + referencia
+    url4="https://www.ucotest.es/panel/webservice/consultabot.php?case=log&men="+var
+    urllib.urlopen(url4)
 
     return
 
@@ -152,6 +156,10 @@ def info(message):
                 respuesta=respuesta + "\n\n🚚 *Estado del pedido:* " + estados[int(dato["fk_statut"])]
 
             bot.send_message(message.chat.id, respuesta, parse_mode="Markdown")
+
+    var = "El usuario con id " + str(message.chat.id) + " ha hecho una peticion de informacion del pedido con referencia " + referencia
+    url4="https://www.ucotest.es/panel/webservice/consultabot.php?case=log&men="+var
+    urllib.urlopen(url4)
 
     return
 
