@@ -61,4 +61,21 @@ class Chat(db.Model):
 
         return record
 
+    @staticmethod
+    def del_config(chat, key):
+	""" Elimina un valor
 
+	Args:
+            :param chat: Id. del chat
+            :param key: Clave del valor a eliminar
+
+        Returns:
+            :return: Nada
+        """
+        record = db.session.query(Chat).filter_by(chat=chat, key=key).first()
+
+	if record is not None:
+		db.session.query(Chat).filter_by(chat=chat, key=key).delete()
+
+	db.session.commit()
+        db.session.close()
