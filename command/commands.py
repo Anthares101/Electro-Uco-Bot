@@ -176,55 +176,54 @@ def watson_bot(message):
 	)
 
 	if response['context']['mostrar_pedido'] == "true":
-	    url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
+        url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=order&ref=" + referencia
+        url2 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
+        url3 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=shipping&ref=" + referencia
 
-	    response = urllib.urlopen(url)
+        response = urllib.urlopen(url)
+        response2 = urllib.urlopen(url2)
+        response3 = urllib.urlopen(url3)
 
-	    datos = json.loads(response.read())
+        datos = json.loads(response.read())
+        datos2 = json.loads(response2.read())
+        datos3 = json.loads(response3.read())
 
-	    if (datos == 1):
-		bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
+        if(datos==1 or datos2==1 or datos3==1):
+            bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
 
-	    elif (datos == 2):
-		bot.send_message(message.chat.id, "No se ha podido localizar su pedido")
+        elif(datos==2 or datos2==2 or datos3==2):
+            bot.send_message(message.chat.id, "No se ha podido localizar su pedido")
 
-	    elif (datos == 3):
-		bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
+        elif(datos==3 or datos2==3 or datos3==3):
+            bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
 
-	    elif (datos == 4):
-		bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
+        elif(datos==4 or datos2==4 or datos3==4):
+            bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
 
-	    else:
+        else:
 
-		for dato in datos:
-		    url2 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=getImage&ref=" + dato['ref']
-		    url3 = "https://www.ucotest.es/panel/webservice/consultabot.php?ref=" + dato['ref'] + "&case=urlshop"
+        chat.Chat.set_config(message.chat.id, 'referencia', referencia)
 
-		    response2 = urllib.urlopen(url2)
-		    response3 = urllib.urlopen(url3)
+            for dato in datos:
+                respuesta=("📝 *Codigo de referencia del pedido:* " + str(dato["ref"]) + "\n📆 *Fecha del pedido:* " + str(dato["date_commande"]))
 
-		    datos2 = json.loads(response2.read())
-		    datos3 = json.loads(response3.read())
+            total = 0
 
-		    if (datos2 == 1 or datos3 == 1):
-		        bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
+            respuesta=respuesta+"\n\n\n📋 *Listado de productos:*\n\n"
 
-		    elif (datos2 == 2 or datos3 == 2):
-		        bot.send_message(message.chat.id, "No se ha podido localizar su pedido")
+            for dato in datos2:
+                total_ttc=float(dato["total_ttc"])
+                respuesta=respuesta + "- " + "_" + dato["label"] + "_" + "\t\t" + "_" + str(total_ttc) + "_" + "\u20ac\n"
+                total = total + float(dato["total_ttc"])
 
-		    elif (datos2 == 3 or datos3 == 3):
-		        bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
+            respuesta=(respuesta + "\n\n💶 *Precio total:* " + str(total) + "\u20ac")
 
-		    elif (datos2 == 4 or datos3 == 4):
-		        bot.send_message(message.chat.id, "Ha habido un error al realizar su consulta de pedido")
+            estados = { 0:"_Borrador_", 1:"_En curso_", 2:"_Entregado_" }
 
-		    else:
-		        nombre = dato["label"]
-		        precio = float(dato["total_ttc"])
-		        link = datos3
+            for dato in datos3:
+                respuesta=respuesta + "\n\n🚚 *Estado del pedido:* " + estados[int(dato["fk_statut"])]
 
-		        bot.send_photo(message.chat.id, datos2, caption="🛒 _" + nombre + "_" + "\n💶 *Precio:* " + str(precio) + "\u20ac", parse_mode="Markdown")
-		        bot.send_message(message.chat.id, link)
+            bot.send_message(message.chat.id, respuesta, parse_mode="Markdown")
 
 	    response['context']['mostrar_pedido'] == "false"
 	else:
