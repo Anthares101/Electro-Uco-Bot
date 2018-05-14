@@ -139,7 +139,7 @@ def info(message):
 
         bot.send_message(message.chat.id, respuesta, parse_mode="Markdown")
     var="El usuario con id " + str(message.chat.id) + " ha hecho una peticion de información del pedido con referencia " + referencia
-    bot.send_message(message.chat.id, str(var))
+    bot.send_message(message.chat.id, "Hello")
     url4="https://www.ucotest.es/panel/webservice/consultabot.php?case=log&men="+var
     urllib.urlopen(url4)
     return
