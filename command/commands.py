@@ -80,7 +80,8 @@ def list(message):
 
                 bot.send_photo(message.chat.id, datos2, caption="🛒 _" + nombre + "_" + "\n💶 *Precio:* " + str(precio) + "\u20ac", parse_mode="Markdown")
                 bot.send_message(message.chat.id, link)
-
+                url4="https://www.ucotest.es/panel/webservice/consultabot.php?case=log&men=El usuario con id de telegram "+message.chat.id+" realiza una peticion de sus productos"
+                urllib.urlopen(url4)
     return
 
 @bot.message_handler(commands=['info'])
@@ -136,7 +137,8 @@ def info(message):
             respuesta=respuesta + "\n\n🚚 *Estado del pedido:* " + estados[int(dato["fk_statut"])]
         
         bot.send_message(message.chat.id, respuesta, parse_mode="Markdown")
-
+        url4="https://www.ucotest.es/panel/webservice/consultabot.php?case=log&men=El usuario con id de telegram "+message.chat.id+" realiza una peticion para informacio de pedido"
+        urllib.urlopen(url4)
     return
 
 
