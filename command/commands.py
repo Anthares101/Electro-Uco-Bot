@@ -27,10 +27,10 @@ def start(message):
         workspace_id=WORKSPACE_ID
     )
 
-    response['context']['info_web'] = INFO_WEB
-    response['context']['info_nombre_bot'] = INFO_NOMBRE_BOT
-    response['context']['info_tlfno_contacto'] = INFO_TLFNO_CONTACTO
-    response['context']['info_email_contacto'] = INFO_EMAIL_CONTACTO
+    #response['context']['info_web'] = INFO_WEB
+    #response['context']['info_nombre_bot'] = INFO_NOMBRE_BOT
+    #response['context']['info_tlfno_contacto'] = INFO_TLFNO_CONTACTO
+    #response['context']['info_email_contacto'] = INFO_EMAIL_CONTACTO
 
     contexto = json.dumps(response['context'])
 
@@ -250,7 +250,7 @@ def watson_bot(message):
         var = "El usuario con id " + str(message.chat.id) + " ha hecho una peticion de informacion del pedido con referencia " + referencia
         send_log(var)
 
-        response['context']['mostrar_pedido'] == "false"
+        response['context']['mostrar_pedido'] = "false"
     else:
         bot.send_message(message.chat.id, response['output']['text'][0])
 
