@@ -27,7 +27,7 @@ def start(message):
         workspace_id=WORKSPACE_ID
     )
 
-    #response['context']['info_web'] = INFO_WEB
+    response['context']['info_web'] = INFO_WEB
     #response['context']['info_nombre_bot'] = INFO_NOMBRE_BOT
     #response['context']['info_tlfno_contacto'] = INFO_TLFNO_CONTACTO
     #response['context']['info_email_contacto'] = INFO_EMAIL_CONTACTO
