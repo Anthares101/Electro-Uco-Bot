@@ -28,6 +28,8 @@ def start(message):
     )
 
     bot.send_message(message.chat.id, response['context']['info_web'])
+    bot.send_message(message.chat.id, USERNAME)
+    bot.send_message(message.chat.id, INFO_WEB)
 
     response['context']['info_web'] = INFO_WEB
     #response['context']['info_nombre_bot'] = INFO_NOMBRE_BOT
