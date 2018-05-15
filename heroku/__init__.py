@@ -35,7 +35,7 @@ if not PASSWORD:
     raise Exception('No se ha definido PASSWORD')
 
 WEB_DOMAIN = 'www.ucotest.es'
-INFO_WEB = "www.ucotest.es"
+INFO_WEB = 'www.ucotest.es'
 INFO_NOMBRE_BOT = 'ElectroUCO bot'
 INFO_TLFNO_CONTACTO = '957 21 10 08'
 INFO_EMAIL_CONTACTO = 'administracion@ucotest.es'

@@ -29,9 +29,8 @@ def start(message):
 
     bot.send_message(message.chat.id, response['context']['info_web'])
     bot.send_message(message.chat.id, USERNAME)
-    bot.send_message(message.chat.id, INFO_WEB)
 
-    response['context']['info_web'] = INFO_WEB
+    response['context']['info_web'] = USERNAME
     #response['context']['info_nombre_bot'] = INFO_NOMBRE_BOT
     #response['context']['info_tlfno_contacto'] = INFO_TLFNO_CONTACTO
     #response['context']['info_email_contacto'] = INFO_EMAIL_CONTACTO
