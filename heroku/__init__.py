@@ -34,11 +34,26 @@ PASSWORD = os.environ.get('PASSWORD', False)
 if not PASSWORD:
     raise Exception('No se ha definido PASSWORD')
 
-WEB_DOMAIN = 'www.ucotest.es'
-INFO_WEB = 'www.ucotest.es'
-INFO_NOMBRE_BOT = 'ElectroUCO bot'
-INFO_TLFNO_CONTACTO = '957 21 10 08'
-INFO_EMAIL_CONTACTO = 'administracion@ucotest.es'
+WEB_DOMAIN = os.environ.get('WEB_DOMAIN', False)
+if not WEB_DOMAIN:
+    raise Exception('No se ha definido WEB_DOMAIN')
+
+INFO_WEB = os.environ.get('INFO_WEB', False)
+if not INFO_WEB:
+    raise Exception('No se ha definido INFO_WEB')
+
+INFO_NOMBRE_BOT = os.environ.get('INFO_NOMBRE_BOT', False)
+if not INFO_NOMBRE_BOT:
+    raise Exception('No se ha definido INFO_NOMBRE_BOT')
+
+INFO_TLFNO_CONTACTO = os.environ.get('INFO_TLFNO_CONTACTO', False)
+if not INFO_TLFNO_CONTACTO:
+    raise Exception('No se ha definido INFO_TLFNO_CONTACTO')
+
+INFO_EMAIL_CONTACTO = os.environ.get('INFO_EMAIL_CONTACTO', False)
+if not INFO_EMAIL_CONTACTO:
+    raise Exception('No se ha definido INFO_EMAIL_CONTACTO')
+
 
 bot = TeleBot(TOKEN, os.environ.get('POLLING', False))
 

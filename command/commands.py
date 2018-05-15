@@ -27,13 +27,10 @@ def start(message):
         workspace_id=WORKSPACE_ID
     )
 
-    bot.send_message(message.chat.id, response['context']['info_web'])
-    bot.send_message(message.chat.id, USERNAME)
-
-    response['context']['info_web'] = USERNAME
-    #response['context']['info_nombre_bot'] = INFO_NOMBRE_BOT
-    #response['context']['info_tlfno_contacto'] = INFO_TLFNO_CONTACTO
-    #response['context']['info_email_contacto'] = INFO_EMAIL_CONTACTO
+    response['context']['info_web'] = INFO_WEB
+    response['context']['info_nombre_bot'] = INFO_NOMBRE_BOT
+    response['context']['info_tlfno_contacto'] = INFO_TLFNO_CONTACTO
+    response['context']['info_email_contacto'] = INFO_EMAIL_CONTACTO
 
     contexto = json.dumps(response['context'])
 
@@ -55,9 +52,7 @@ def list(message):
         else:
             referencia = referencia.value
 
-    send_message(message.chat.id, "illo")
     url = "https://" + WEB_DOMAIN + "/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
-    send_message(message.chat.id, url)
 
     response = urllib.urlopen(url)
 
