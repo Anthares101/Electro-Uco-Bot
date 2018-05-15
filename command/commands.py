@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 import requests
 import os
-from heroku import bot, USERNAME, PASSWORD, WORKSPACE_ID
+from heroku import bot, USERNAME, PASSWORD, WORKSPACE_ID, WEB_DOMAIN, INFO_WEB, INFO_NOMBRE_BOT, INFO_TLFNO_CONTACTO, INFO_EMAIL_CONTACTO
 from telebot import util
 import urllib, json
 import watson_developer_cloud
@@ -14,9 +14,8 @@ assistant = watson_developer_cloud.AssistantV1(
     version='2018-02-16'
 )
 
-
 def send_log(log_information):
-    url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=log&men=" + log_information
+    url = "https://" + WEB_DOMAIN + "/panel/webservice/consultabot.php?case=log&men=" + log_information
     urllib.urlopen(url)
 
     return
@@ -28,7 +27,13 @@ def start(message):
         workspace_id=WORKSPACE_ID
     )
 
+    response['context']['info_web'] = INFO_WEB
+    response['context']['info_nombre_bot'] = INFO_NOMBRE_BOT
+    response['context']['info_tlfno_contacto'] = INFO_TLFNO_CONTACTO
+    response['context']['info_email_contacto'] = INFO_EMAIL_CONTACTO
+
     contexto = json.dumps(response['context'])
+
     chat.Chat.set_config(message.chat.id, 'contexto', contexto)
 
     chat.Chat.del_config(message.chat.id, 'referencia')
@@ -47,7 +52,7 @@ def list(message):
         else:
             referencia = referencia.value
 
-    url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
+    url = "https://" + WEB_DOMAIN + "/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
 
     response = urllib.urlopen(url)
 
@@ -70,8 +75,8 @@ def list(message):
         chat.Chat.set_config(message.chat.id, 'referencia', referencia)
 
         for dato in datos:
-            url2 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=getImage&ref=" + dato['ref']
-            url3 = "https://www.ucotest.es/panel/webservice/consultabot.php?ref=" + dato['ref'] + "&case=urlshop"
+            url2 = "https://" + WEB_DOMAIN + "/panel/webservice/consultabot.php?case=getImage&ref=" + dato['ref']
+            url3 = "https://" + WEB_DOMAIN + "/panel/webservice/consultabot.php?ref=" + dato['ref'] + "&case=urlshop"
 
             response2 = urllib.urlopen(url2)
             response3 = urllib.urlopen(url3)
@@ -116,9 +121,9 @@ def info(message):
         else:
             referencia = referencia.value
 
-    url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=order&ref=" + referencia
-    url2 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
-    url3 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=shipping&ref=" + referencia
+    url = "https://" + WEB_DOMAIN + "/panel/webservice/consultabot.php?case=order&ref=" + referencia
+    url2 = "https://" + WEB_DOMAIN + "/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
+    url3 = "https://" + WEB_DOMAIN + "/panel/webservice/consultabot.php?case=shipping&ref=" + referencia
 
     response = urllib.urlopen(url)
     response2 = urllib.urlopen(url2)
@@ -191,9 +196,9 @@ def watson_bot(message):
     )
 
     if response['context']['mostrar_pedido'] == "true":
-        url = "https://www.ucotest.es/panel/webservice/consultabot.php?case=order&ref=" + referencia
-        url2 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
-        url3 = "https://www.ucotest.es/panel/webservice/consultabot.php?case=shipping&ref=" + referencia
+        url = "https://" + WEB_DOMAIN + "/panel/webservice/consultabot.php?case=order&ref=" + referencia
+        url2 = "https://" + WEB_DOMAIN + "/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
+        url3 = "https://" + WEB_DOMAIN + "/panel/webservice/consultabot.php?case=shipping&ref=" + referencia
 
         response = urllib.urlopen(url)
         response2 = urllib.urlopen(url2)
@@ -243,7 +248,7 @@ def watson_bot(message):
         var = "El usuario con id " + str(message.chat.id) + " ha hecho una peticion de informacion del pedido con referencia " + referencia
         send_log(var)
 
-        response['context']['mostrar_pedido'] == "false"
+        response['context']['mostrar_pedido'] = "false"
     else:
         bot.send_message(message.chat.id, response['output']['text'][0])
 
