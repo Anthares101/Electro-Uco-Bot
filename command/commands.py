@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 import requests
 import os
-from heroku import bot, USERNAME, PASSWORD, WORKSPACE_ID, WEB_DOMAIN, INFO_WEB, INFO_NOMBRE_BOT, INFO_TLFNO_CONTACTO, INFO_EMAIL_CONTACTOQQ
+from heroku import bot, USERNAME, PASSWORD, WORKSPACE_ID, WEB_DOMAIN, INFO_WEB, INFO_NOMBRE_BOT, INFO_TLFNO_CONTACTO, INFO_EMAIL_CONTACTO
 from telebot import util
 import urllib, json
 import watson_developer_cloud
