@@ -20,6 +20,7 @@ def send_log(log_information):
 
     return
 
+
 @bot.message_handler(commands=['start'])
 def start(message):
     response = assistant.message(
@@ -52,6 +53,7 @@ def list(message):
             referencia = referencia.value
 
     url = "https://" + WEB_DOMAIN + "/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
+    send_message(message.chat.id, url)
 
     response = urllib.urlopen(url)
 
