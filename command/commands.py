@@ -52,6 +52,7 @@ def list(message):
         else:
             referencia = referencia.value
 
+    send_message(message.chat.id, "illo")
     url = "https://" + WEB_DOMAIN + "/panel/webservice/consultabot.php?case=allProductInOrder&ref=" + referencia
     send_message(message.chat.id, url)
 
