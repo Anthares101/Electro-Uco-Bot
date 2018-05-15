@@ -27,6 +27,8 @@ def start(message):
         workspace_id=WORKSPACE_ID
     )
 
+    bot.send_message(message.chat.id, response['context']['info_web'])
+
     response['context']['info_web'] = INFO_WEB
     #response['context']['info_nombre_bot'] = INFO_NOMBRE_BOT
     #response['context']['info_tlfno_contacto'] = INFO_TLFNO_CONTACTO
