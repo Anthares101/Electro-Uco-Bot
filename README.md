@@ -18,7 +18,7 @@ json, que seproporcionará como parte del paquete. Una vez importado el json, el
 repositorio de GitHub (Se recomienda realizar un fork de este repositorio por si hubiese que realizar algun ajustes en el codigo, sobre
 todo cambios relacionados con URLs).
 
-Una vez se hayan realizado estos pasos, solo queda asignar las siguientes variables de heroku:
+Una vez se hayan realizado estos pasos, solo queda añadir y configurar las siguientes variables en heroku en la sección _Setting_:
 
 	o BOT_TOKEN: Proporcionado por el BotFather.
 	o DATABASE_URL: Dirección url de la base de datos proporcionada por heroku.
@@ -50,7 +50,7 @@ Para configurar las variables que necesitamos en local copiar el archivo siguien
 cp .env.dist .env
 ```
 
-Hay algunos valores que están en blanco, su valor debe ser el mismo que aparece en Heroku. Los podemos ver dentro de la sección _Setting_ en la pagina de Heroku.
+Hay algunos valores que están en blanco, su valor debe ser el mismo que aparece en Heroku (Se añadieron y configuraron en el apartado anterior). Los podemos ver dentro de la sección _Setting_ en la pagina de Heroku como se vio en el apartado de instalación.
 
 ## Ejecución
 
