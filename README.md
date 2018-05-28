@@ -31,7 +31,7 @@ Una vez se hayan realizado estos pasos, solo queda asignar las siguientes variab
 	o SECRET_TOKEN: Token que genera Heroku para restringir los accesos a esta aplicación.
 	o USERNAME: Aparece en la pestaña deploy, en el workspace del asistente de IBM Watson.
 	o WEB_DOMAIN: El dominio de la web en la que se alojan los servicios que proporciona el paquete UCOShop. 
-	Por ejemplo: www.example.com.
+		Por ejemplo: www.example.com.
 	o WORKSPACE_ID: Aparece en la pestaña deploy, en el workspace del asistente de IBM Watson.
 
 
@@ -80,7 +80,7 @@ Ejecutar el bot en local desactiva el _webhook_. Para iniciar en modo local ejec
 heroku local polling
 ``` 
 
-Si se quiere volver a usar el bot en el servidor, hay que volver a configurar el _webhook_ como dice el apartado anterior.
+Si se quiere volver a usar el bot en el servidor, hay que volver a configurar el _webhook_ como dice el apartado siguiente.
 
 ### En el servidor
 
@@ -96,7 +96,9 @@ O si tenemos configurado el _.env_:
 python webhook.py
 ```
 
-También se puede iniciar dentro del apartado _Resources_ de la web de Heroku.
+También se puede iniciar dentro del apartado _Resources_ de la web de Heroku. En este apartado es posible realizar la sincronización con 
+el repositorio de github del proyecto y desplegar una rama de dicho repositorio.También se pueden configurar despliegues automaticos de
+una rama concreta para que se realice un nueve despliegue del protyecto si se realizan cambios en dicha rama aplicando asi los cambios (ATENCIÓN: Asegurarse de que se configura esta opción sobre una rama estable para evitar problemas en la aplicación desplegada). 
 
 ## Funciones
 
