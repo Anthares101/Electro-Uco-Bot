@@ -162,6 +162,6 @@ Para obtener APIs abiertas podeís consultar el siguiente repositorio de Github:
 
 * [https://github.com/toddmotto/public-apis](https://github.com/toddmotto/public-apis)
 
-Repositorio del cual se realiza el fork:
+Repositorio del cual procede el fork:
 
 * [https://github.com/aulasoftwarelibre/hackathonbot](https://github.com/aulasoftwarelibre/hackathonbot)
