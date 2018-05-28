@@ -1,15 +1,29 @@
 # Electro UCO bot 
 
-Ejemplo de bot desplegado en Heroku para el heroku del Aula de Software Libre de marzo de 2018.
+Ejemplo de bot desplegado en Heroku para el proyecto de sistemas de la información.
 
 
 ## Instalación
 
-Es imprescindible tener cuenta en Heroku para acelerar la instalación. Para desplegar la aplicación en heroku pulse el siguiente botón:
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-Cuando _Heroku_ se lo solicite indique el token de su bot. El nombre de la aplicación debe coincidir con el dato solicitado en _HEROKU_APP_NAME_.
+Para instalar el bot y adaptarlo a las necesidades de otra empresa, se deben de seguir los siguientes pasos:
+- Crear un bot en telegram: Mediante el BotFather, se puede crear un bot en telegram con tan solo especificarle el nombre y el nombre de usuario de
+  dicho bot. Una vez se haya finalizado el proceso de creación del bot, el BotFather proporcionará un token que se necesitará más adelante.
+- Crear una cuenta en IBM Watson: Una vez creada, solicitar el servicio de asistente virtual, y crear uno nuevo, importando el archivo json, que se
+  proporcionará como parte del paquete. Una vez importado el json, el asistente estaría listo.
+- Activar una cuenta en heroku: Cuando se haya activado, solo habrá que crear una nueva aplicación que esté sincronizada con el repositorio de GitHub (Se recomienda realizar un fork de este repositorio por si hubiese que realizar algun ajustes en el codigo, sobre todo cambios relacionados con URLs).
+  Una vez se hayan realizado estos pasos, solo queda asignar las siguientes variables de heroku:
+	o BOT_TOKEN: Proporcionado por el BotFather.
+	o DATABASE_URL: Dirección url de la base de datos proporcionada por heroku.
+	o HEROKU_APP_NAME: Nombre de la aplicación de heroku, es importante que coincidan exactamente.
+	o INFO_EMAIL_CONTACTO: Email de atención del cliente del que dispone la empresa.
+	o INFO_NOMBRE_BOT: Nombre del bot.
+	o INFO_TLFNO_CONTACTO: Teléfono de atención del cliente del que dispone la empresa.
+	o INFO_WEB: Web en la que está la tienda online.
+	o PASSWORD: Aparece en la pestaña deploy, en el workspace del asistente de IBM Watson.
+	o SECRET_TOKEN: Token que genera Heroku para restringir los accesos a esta aplicación.
+	o USERNAME: Aparece en la pestaña deploy, en el workspace del asistente de IBM Watson.
+	o WEB_DOMAIN: El dominio de la web en la que se alojan los servicios que proporciona el paquete UCOShop. Por ejemplo: www.example.com.
+	o WORKSPACE_ID: Aparece en la pestaña deploy, en el workspace del asistente de IBM Watson.
 
 
 ## Configuración
@@ -27,11 +41,7 @@ Para configurar las variables que necesitamos en local copiar el archivo siguien
 cp .env.dist .env
 ```
 
-Hay algunos valores que están en blanco, su valor debe ser el mismo que aparece en Heroku. Los podemos ver dentro de la sección _Setting_ del _backend_ o ejecutando lo siguiente:
-
-```
-heroku config
-```
+Hay algunos valores que están en blanco, su valor debe ser el mismo que aparece en Heroku. Los podemos ver dentro de la sección _Setting_ en la pagina de Heroku.
 
 ## Ejecución
 
