@@ -97,8 +97,9 @@ python webhook.py
 ```
 
 También se puede iniciar dentro del apartado _Resources_ de la web de Heroku. En este apartado es posible realizar la sincronización con 
-el repositorio de github del proyecto y desplegar una rama de dicho repositorio.También se pueden configurar despliegues automaticos de
-una rama concreta para que se realice un nueve despliegue del protyecto si se realizan cambios en dicha rama aplicando asi los cambios (ATENCIÓN: Asegurarse de que se configura esta opción sobre una rama estable para evitar problemas en la aplicación desplegada). 
+el repositorio de Github del proyecto y desplegar una rama de dicho repositorio. También se pueden configurar despliegues automaticos de
+una rama concreta para que se realice un nueve despliegue del protyecto si se realizan cambios en dicha rama aplicando asi los cambios
+(ATENCIÓN: Asegurarse de que se configura esta opción sobre una rama estable para evitar problemas en la aplicación desplegada). 
 
 ## Funciones
 
@@ -160,3 +161,7 @@ Un ejemplo de uso se encuentra en `commands/db.py`.
 Para obtener APIs abiertas podeís consultar el siguiente repositorio de Github:
 
 * [https://github.com/toddmotto/public-apis](https://github.com/toddmotto/public-apis)
+
+Repositorio del cual se realiza el fork:
+
+* [https://github.com/aulasoftwarelibre/hackathonbot](https://github.com/aulasoftwarelibre/hackathonbot)
