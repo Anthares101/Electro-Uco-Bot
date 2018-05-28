@@ -156,7 +156,7 @@ Se adjunta una clase Chat que permite almacenar valores en una tabla. Se puede i
 Un ejemplo de uso se encuentra en `commands/db.py`.
 
 
-## Referencias
+## Referencias
 
 Para obtener APIs abiertas podeís consultar el siguiente repositorio de Github:
 
