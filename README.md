@@ -1,7 +1,7 @@
 # Electro UCO bot 
 
 Bot desplegado en Heroku para el proyecto de Sistemas de la Información destinado a realizar el seguimiento del estado de un pedido.
-Es capaz además de dar soporte según las necesidades de la empresa a los usuarios gracias al procesamiento de lenguaje natural que
+Es capaz además, de dar soporte según las necesidades de la empresa a los usuarios gracias al procesamiento de lenguaje natural que
 brinda la integración del bot con IBM Watson.
 
 
