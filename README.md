@@ -101,7 +101,7 @@ python webhook.py
 También se puede iniciar dentro del apartado _Resources_ de la web de Heroku. En este apartado es posible realizar la sincronización con 
 el repositorio de Github del proyecto y desplegar una rama de dicho repositorio. También se pueden configurar despliegues automaticos de
 una rama concreta para que se realice un nueve despliegue del protyecto si se realizan cambios en dicha rama aplicando asi los cambios
-(ATENCIÓN: Asegurarse de que se configura esta opción sobre una rama estable para evitar problemas en la aplicación desplegada). 
+(ATENCIÓN: Asegurarse de que se configura esta opción sobre una rama estable para evitar problemas en la aplicación desplegada y que el stack utilizado es Heroku-16). 
 
 ## Funciones
 
